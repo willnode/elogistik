@@ -15,6 +15,10 @@ const session = {
 		avatar = avatar === undefined ? (session.login && session.login.avatar) : avatar;
 		return avatar ? uploadsUrl +'avatar/'+avatar : imageAvatarUrl
 	},
+	formatRupiah: ((formatter) => (rp) => formatter.format(rp))(new Intl.NumberFormat('id-ID', {
+		style: 'currency',
+		currency: 'IDR',
+	})),
 	setMessage(v) {
 		session.message = v;
 		session.reload();

@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
 	drawerContainer: {
 		overflow: 'auto',
 	},
+	appBarButton: {
+		padding: 8,
+	},
 	content: {
 		flexGrow: 1,
 		padding: theme.spacing(3),

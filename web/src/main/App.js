@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import Admin, { Sidebar as AdminSidebar, Topbar as AdminTopbar } from '../admin';
 import Home from '../static/home';
+import Order from '../static/order';
+import Layanan from '../static/layanan';
+import Portofolio from '../static/portofolio';
+import About from '../static/about';
 import Login from '../static/login';
 import Offline from '../static/offline';
 import Layout from '../widget/layout';
@@ -15,6 +19,19 @@ const Logout = function () {
   sessionStorage.clear();
   return <Redirect to="/login" />
 }
+
+
+const StaticRooms = (props) => (
+  <Switch>
+    <Route exact path="/" component={Home} />
+    <Route exact path="/offline" component={Offline} />
+    <Route exact path="/layanan" component={Layanan} />
+    <Route exact path="/order" component={Order} />
+    <Route exact path="/portofolio" component={Portofolio} />
+    <Route exact path="/about" component={About} />
+    <Route {...props} />
+  </Switch>
+)
 
 const RoleRooms = (props) => (
   <Switch>
@@ -63,13 +80,13 @@ class App extends Component {
     return (
       <Layout key={this.state.counter}>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/offline" component={Offline} />
           <Route exact path="/logout" component={Logout} />
           <Route exact path="/login">
             <RedirectIfLoggedInOrShow component={Login} />
           </Route>
-          <RoleRooms component={Page404} />
+          <StaticRooms>
+            <RoleRooms component={Page404} />
+          </StaticRooms>
         </Switch>
       </Layout>
     );

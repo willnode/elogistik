@@ -4,7 +4,12 @@ import { Redirect } from 'react-router-dom';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import MUISelect from '@material-ui/core/Select';
 import MUICheckbox from '@material-ui/core/Checkbox';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+
 import Box from '@material-ui/core/Box';
 
 function controlDelete(url) {
@@ -36,8 +41,27 @@ const Input = ({ name, value, id, ...props }) => (
 		variant="outlined"
 		fullWidth
 		defaultValue={value}
-		margin="normal"
+		margin='dense'
 		{...props} />
+)
+
+
+const Select = ({ name, label, id, options, value, ...props }) => (
+	<FormControl variant="outlined" margin='dense' fullWidth>
+		<InputLabel id={name+'-label'}>{label}</InputLabel>
+		<MUISelect
+			name={name}
+			id={id || name}
+			labelId={name+'-label'}
+			defaultValue={value}
+			label={label}
+			{...props}
+		>
+			{
+				Object.entries(options).map(([k, v]) => <MenuItem key={k} value={k}>{v}</MenuItem>)
+			}
+		</MUISelect>
+	</FormControl>
 )
 
 const Form = ({ action, redirect, onSubmit, children }) => {
@@ -96,11 +120,13 @@ const BackButton = ({ label, color, variant, ...props }) => (
 	>{label || "Go Back"}</Button>
 )
 
+
 export {
 	controlPost,
 	controlDelete,
 	CheckRole,
 	Input,
+	Select,
 	Form,
 	Submit,
 	Checkbox,

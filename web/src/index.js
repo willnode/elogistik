@@ -8,15 +8,26 @@ import { baseUrl } from './main/Config';
 import App from './main/App';
 
 function MainApp() {
-  const prefersDarkMode = false;// useMediaQuery('(prefers-color-scheme: dark)');
   const theme = React.useMemo(
     () =>
       createMuiTheme({
         palette: {
-          type: prefersDarkMode ? 'dark' : 'light',
+          primary: {
+            light: '#ff833a',
+            main: '#e65100',
+            dark: '#ac1900',
+            contrastText: '#fff',
+          },
+          secondary: {
+            light: '#484848',
+            main: '#212121',
+            dark: '#000000',
+            contrastText: '#fff',
+          },
+          type: 'dark',
         },
       }),
-    [prefersDarkMode],
+    [],
   );
 
   return (

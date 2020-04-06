@@ -1,9 +1,9 @@
 import React from 'react';
 import Page from '../widget/page';
 
-export default function Home() {
+export default function About() {
 
 	return (<Page>
-		<h1>Welcome to Best Logistics!</h1>
+		<h1>Tentang Best Logistics</h1>
 	</Page>)
 }
