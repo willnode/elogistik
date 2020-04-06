@@ -1,6 +1,5 @@
 import React from 'react';
 import Drawer from '@material-ui/core/Drawer';
-import Toolbar from '@material-ui/core/Toolbar';
 import Hidden from '@material-ui/core/Hidden';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -13,6 +12,8 @@ import { Link } from 'react-router-dom';
 import FacebookIcon from '@material-ui/icons/Facebook'
 import InstagramIcon from '@material-ui/icons/Instagram'
 import YouTubeIcon from '@material-ui/icons/YouTube'
+import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
 
 
 const DrawerListItem = ({ to, icon, label }) => (
@@ -44,19 +45,11 @@ function DrawerComponent({ children }) {
 				</Drawer>
 			</Hidden>
 			<Hidden xsDown implementation="css">
-				<Drawer
-					classes={{
-						paper: classes.drawerPaper,
-					}}
-					className={classes.drawer}
-					variant="permanent"
-					open
-				>
-					<Toolbar />
-					<div className={classes.drawerContainer}>
+				<Box py={3} my={8} marginLeft={1} clone>
+					<Paper className={classes.content}>
 						{children}
-					</div>
-				</Drawer>
+					</Paper>
+				</Box>
 			</Hidden>
 		</nav>)
 }

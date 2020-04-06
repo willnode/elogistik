@@ -12,6 +12,10 @@ function MainApp() {
     () =>
       createMuiTheme({
         palette: {
+          background: {
+            default: '#111111',
+            paper: '#212121',
+          },
           primary: {
             light: '#ff833a',
             main: '#e65100',

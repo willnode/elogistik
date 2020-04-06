@@ -33,6 +33,9 @@ export default function Order() {
 			<Input name="barang_tujuan" label="Tujuan" required/>
 			<Submit label="Hitung"/>
 		</Form>
+		<Box marginY={2}>
 		<Typography variant="h5">Total Harga: {harga ? session.formatRupiah(harga) : '-'}</Typography>
+
+		</Box>
 	</Page>)
 }

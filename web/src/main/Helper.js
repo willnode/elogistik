@@ -25,7 +25,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 	content: {
 		flexGrow: 1,
-		padding: theme.spacing(3),
+		paddingTop: theme.spacing(3),
+		paddingLeft: theme.spacing(1),
+		paddingRight: theme.spacing(1),
 	},
 	blockButton: {
 		marginTop: theme.spacing(2),

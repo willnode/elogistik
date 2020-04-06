@@ -4,7 +4,6 @@ import Drawer from './drawer';
 import Footer from './footer';
 import session from '../main/Session';
 import Alert from '@material-ui/lab/Alert';
-import Toolbar from '@material-ui/core/Toolbar';
 import { useStyles } from '../main/Helper';
 
 function Notification() {
@@ -31,15 +30,16 @@ export default function Layout({ children }) {
 	session.drawerOpen = drawerOpen;
 	session.toggleDrawerOpen = () => setDrawerOpen(!drawerOpen);
 	return (
-		<div ref={ref} className={classes.root}>
-			<Header/>
+		<>
+		<Header/>
+			<div ref={ref} className={classes.root}>
 			<Drawer container={ref}/>
 			<main className={classes.content}>
-				<Toolbar/>
 				<Notification/>
 				{children}
 				<Footer/>
 			</main>
 		</div>
+		</>
 	)
 }
