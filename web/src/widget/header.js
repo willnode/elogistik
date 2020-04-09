@@ -11,7 +11,7 @@ import { RoleTopbars } from '../main/App';
 import session from '../main/Session';
 import { withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import { baseUrl } from '../main/Config';
+import { publicUrl } from '../main/Config';
 
 const HeadButton = withStyles({
   text: {
@@ -24,10 +24,10 @@ export default function Header() {
     <Box style={{ background: 'black', position: "sticky", top: -120, zIndex: 1250 }}>
       <Box display="flex" height={120} paddingX={2} alignItems="center">
         <Box height={90} clone>
-          <img src={baseUrl + '/assets/logo best logistic.png'} alt="Logo" />
+          <img src={publicUrl + '/assets/logo best logistic.png'} alt="Logo" />
         </Box>
         <Box height={60} clone margin="auto">
-          <img src={baseUrl + '/assets/header.png'} alt="Logo" />
+          <img src={publicUrl + '/assets/header.png'} alt="Logo" />
         </Box>
       </Box>
       <AppBar position="static" className={classes.appBar}>

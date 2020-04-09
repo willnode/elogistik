@@ -16,26 +16,25 @@ export default function Order() {
 			let harga = (volume / patokan) * 5000 * data.barang_jumlah;
 			setHarga(harga);
 		}}>
-			<Input name="barang_nama" label="Nama Barang" required/>
+			<Input name="barang_nama" label="Nama Barang" required />
 			<Select name="barang_jalur" label="Jalur" options={{
 				darat: 'Darat',
 				laut: 'Laut',
 				udara: 'Udara',
-			}} required/>
+			}} required />
 			<Box paddingLeft={10} paddingTop={1}>
 				<Typography>Dimensi Barang</Typography>
-				<Input name="barang_dimensi_p" label="Panjang (CM)" type="number" required/>
-				<Input name="barang_dimensi_l" label="Lebar (CM)" type="number" required/>
-				<Input name="barang_dimensi_t" label="Tinggi (CM)" type="number" required/>
+				<Input name="barang_dimensi_p" label="Panjang (CM)" type="number" required />
+				<Input name="barang_dimensi_l" label="Lebar (CM)" type="number" required />
+				<Input name="barang_dimensi_t" label="Tinggi (CM)" type="number" required />
 			</Box>
-			<Input name="barang_jumlah" label="Jumlah Barang (Item)" type="number" required/>
-			<Input name="barang_asal" label="Asal" required/>
-			<Input name="barang_tujuan" label="Tujuan" required/>
-			<Submit label="Hitung"/>
+			<Input name="barang_jumlah" label="Jumlah Barang (Item)" type="number" required />
+			<Input name="barang_asal" label="Asal" required />
+			<Input name="barang_tujuan" label="Tujuan" required />
+			<Submit label="Hitung" />
 		</Form>
 		<Box marginY={2}>
-		<Typography variant="h5">Total Harga: {harga ? session.formatRupiah(harga) : '-'}</Typography>
-
+			<Typography variant="h5">Total Harga: {harga ? session.formatRupiah(harga) : '-'}</Typography>
 		</Box>
 	</Page>)
 }

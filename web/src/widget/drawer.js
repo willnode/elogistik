@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
-import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { RoleSidebars } from '../main/App';
 import { useStyles } from '../main/Helper';
-import session from '../main/Session';
+import { Context } from '../main/Contexts';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 import FacebookIcon from '@material-ui/icons/Facebook'
 import InstagramIcon from '@material-ui/icons/Instagram'
 import YouTubeIcon from '@material-ui/icons/YouTube'
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
-
+import List from '@material-ui/core/List';
 
 const DrawerListItem = ({ to, icon, label }) => (
 	<ListItem component={Link} button to={to}>
@@ -25,6 +25,9 @@ const DrawerListItem = ({ to, icon, label }) => (
 
 function DrawerComponent({ children }) {
 	let classes = useStyles();
+	let drawerOpen = useState(false);
+	Context.bind('drawerOpen', drawerOpen);
+	useEffect(() => (() => Context.unbind('drawerOpen')), [])
 	return (
 		<nav>
 			<Hidden smUp implementation="css">
@@ -33,8 +36,8 @@ function DrawerComponent({ children }) {
 					classes={{
 						paper: classes.drawerPaper,
 					}}
-					open={session.drawerOpen}
-					onClose={session.toggleDrawerOpen}
+					open={Context.get('drawerOpen')}
+					onClose={() => Context.set('drawerOpen', false)}
 					ModalProps={{
 						keepMounted: true, // Better open performance on mobile.
 					}}
@@ -47,17 +50,19 @@ function DrawerComponent({ children }) {
 			<Hidden xsDown implementation="css">
 				<Box py={3} my={8} marginLeft={1} clone>
 					<Paper className={classes.content}>
-						{children}
+						<div className={classes.drawerContainer}>
+							{children}
+						</div>
 					</Paper>
 				</Box>
 			</Hidden>
-		</nav>)
+		</nav>
+	)
 }
 export default function () {
 	return <RoleSidebars>
 		<DrawerComponent>
 			<List>
-
 				<ListItem>
 					<ListItemText primary="Best Logistic" />
 				</ListItem>

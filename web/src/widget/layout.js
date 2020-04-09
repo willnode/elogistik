@@ -3,7 +3,6 @@ import Header from './header';
 import Drawer from './drawer';
 import Footer from './footer';
 import Alert from '@material-ui/lab/Alert';
-import Toolbar from '@material-ui/core/Toolbar';
 import { useStyles } from '../main/Helper';
 import { Context } from '../main/Contexts';
 
@@ -24,7 +23,6 @@ export default function Layout({ children }) {
 			<div className={classes.root}>
 				<Drawer />
 				<main className={classes.content}>
-					<Toolbar />
 					<Notification />
 					{children}
 					<Footer />
