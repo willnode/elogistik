@@ -35,9 +35,9 @@ class Home extends BaseController
 		}
 	}
 
-	public function check_retail()
+	public function check_retail($id = NULL)
 	{
-		return (new RetailCheckModel())->execute();
+		return (new RetailCheckModel())->execute($id);
 	}
 
 	public function not_found()

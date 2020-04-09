@@ -67,20 +67,19 @@ const Input = ({ name, autoComplete, validator, ...props }) => {
 		{...props} />
 }
 
-const Select = ({ name, label, options, validator, ...props }) => {
+const Select = ({ name, label, options, validator, onChange, ...props }) => {
 	const ref = useRef();
 	useHandleControlValidator(validator, ref);
-	return <FormControl margin='normal' fullWidth>
+	return <FormControl margin='normal' fullWidth helperText={validator && validator[0]}>
 		<InputLabel
 			error={validator && !!validator[0]}
-			helperText={validator && validator[0]}
 			id={name + '-label'}
 		>{label}</InputLabel>
 		<MUISelect
 			name={name}
 			labelId={name + '-label'}
 			label={label}
-			onChange={validator && (e => validator[3].current(e))}
+			onChange={validator ? (e => [validator[3].current(e), onChange && onChange(e)]) : onChange}
 			{...props}
 		>
 			{
@@ -143,8 +142,8 @@ const CommandButton = ({ name, value, label, color, variant, disabled }) => {
 	</Box>
 }
 
-const CommandButtonGroup = ({ label, children }) => {
-	return <Box className="MuiFormControl-marginNormal" display="flex">
+const CommandButtonGroup = ({ label, children, ...props }) => {
+	return <Box display="flex" {...props}>
 		<Box flexGrow={1} className="MuiInputBase-root">{label}</Box>
 		{children}
 	</Box>

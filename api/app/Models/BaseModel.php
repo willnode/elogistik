@@ -240,6 +240,9 @@ class BaseModel extends Model
 				$query,
 				array_flip($this->indexable)
 			);
+			if (count($result['filters']) === 0) {
+				$result['filters'] = NULL;
+			}
 		} else {
 			$result['filters'] = NULL;
 		}
@@ -315,6 +318,7 @@ class BaseModel extends Model
 				}
 				$cursor->groupEnd();
 			}
+
 			if ($filters !== NULL) {
 				$cursor->groupStart();
 				foreach ($filters as $col => $val) {

@@ -25,8 +25,7 @@ const DrawerListItem = ({ to, icon, label }) => (
 
 function DrawerComponent({ children }) {
 	let classes = useStyles();
-	let drawerOpen = useState(false);
-	Context.bind('drawerOpen', drawerOpen);
+	Context.bind('drawerOpen', useState(false));
 	useEffect(() => (() => Context.unbind('drawerOpen')), [])
 	return (
 		<nav>
@@ -48,7 +47,7 @@ function DrawerComponent({ children }) {
 				</Drawer>
 			</Hidden>
 			<Hidden xsDown implementation="css">
-				<Box py={3} my={8} marginLeft={1} clone>
+				<Box py={2} my={8} marginLeft={2} clone>
 					<Paper className={classes.content}>
 						<div className={classes.drawerContainer}>
 							{children}

@@ -1,9 +1,9 @@
 
-const appKey = 'crmtoolkit';
-const appTitle = 'CRM Toolkit';
+const appKey = 'elogistik';
+const appTitle = 'Best Logistic';
 const isProduction = process.env.NODE_ENV === 'production';
 const publicUrl = process.env.PUBLIC_URL;
-const serverUrl = 'http://localhost:4000';
+const serverUrl = isProduction ? 'https://dev.wellosoft.net/elogistik' : 'http://localhost:4000';
 const uploadsUrl = serverUrl + '/uploads';
 const imageAvatarUrl = publicUrl + '/assets/user.png';
 const imageBrandUrl = publicUrl + '/assets/logo.png';

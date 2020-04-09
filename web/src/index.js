@@ -6,13 +6,22 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import * as serviceWorker from './serviceWorker';
 import { publicUrl } from './main/Config';
 import App from './main/App';
+import './style.css';
 
 function GenerateTheme() {
   return createMuiTheme({
+    overrides: {
+      MuiFormControl: {
+        marginNormal: {
+          marginTop: 0,
+          marginBottom: 8,
+        }
+      }
+    },
     palette: {
       background: {
-        default: '#111111',
-        paper: '#212121',
+        default: '#050505',
+        paper: '#111111f8',
       },
       primary: {
         light: '#ff833a',

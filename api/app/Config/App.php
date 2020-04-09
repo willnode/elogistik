@@ -63,7 +63,7 @@ class App extends BaseConfig
 	|
 	| WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 	*/
-	public $uriProtocol = SPARKED ? 'REQUEST_URI' : 'PATH_INFO';
+	public $uriProtocol = 'PATH_INFO';
 
 	/*
 	|--------------------------------------------------------------------------

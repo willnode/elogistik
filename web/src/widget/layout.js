@@ -3,7 +3,7 @@ import Header from './header';
 import Drawer from './drawer';
 import Footer from './footer';
 import Alert from '@material-ui/lab/Alert';
-import { useStyles } from '../main/Helper';
+import Box from '@material-ui/core/Box';
 import { Context } from '../main/Contexts';
 
 function Notification() {
@@ -16,18 +16,17 @@ function Notification() {
 }
 
 export default function Layout({ children }) {
-	let classes = useStyles();
 	return (
 		<>
 			<Header />
-			<div className={classes.root}>
+			<Box display="flex">
 				<Drawer />
-				<main className={classes.content}>
+				<Box p={2} flexGrow={1} component="main">
 					<Notification />
 					{children}
-					<Footer />
-				</main>
-			</div>
+				</Box>
+			</Box>
+			<Footer />
 		</>
 	)
 }

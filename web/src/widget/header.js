@@ -8,10 +8,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { useStyles } from '../main/Helper';
 import { Link } from 'react-router-dom';
 import { RoleTopbars } from '../main/App';
-import session from '../main/Session';
 import { withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import { publicUrl } from '../main/Config';
+import { Context } from '../main/Contexts';
 
 const HeadButton = withStyles({
   text: {
@@ -37,7 +37,7 @@ export default function Header() {
 
               aria-label="open drawer"
               edge="start"
-              onClick={session.toggleDrawerOpen}
+              onClick={() => Context.set('drawerOpen', true)}
               className={classes.menuButton}
             >
               <MenuIcon />

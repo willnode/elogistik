@@ -144,6 +144,11 @@ const popMessages = () => {
 	setMessage(null);
 }
 
+const formatRupiah = ((formatter) => (rp) => formatter.format(rp))(new Intl.NumberFormat('id-ID', {
+	style: 'currency',
+	currency: 'IDR',
+}))
+
 export {
 	useStyles, serverHandler,
 	extractForm, getAvatarUrl,
@@ -152,5 +157,5 @@ export {
 	setError, setMessage,
 	history, login, doLogin,
 	doLogout, doReload,
-	popMessages,
+	popMessages, formatRupiah
 };
