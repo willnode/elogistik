@@ -162,6 +162,7 @@ class BaseModel extends Model
 			'query' => isset($this->query) ? array_merge($queryCan, $this->query) : NULL,
 			'fields' => $fields,
 			'method' => $this->method,
+			'files' => $this->fileUploadRules,
 		];
 	}
 
@@ -210,6 +211,19 @@ class BaseModel extends Model
 		}
 		$result['orderBy'] = $orderBy;
 		$result['orderDirection'] = $orderDirection;
+
+		// Group By
+		$groupBy = $query['groupBy'] ?? NULL;
+		$groupBy = $groupBy ?: NULL;
+		if ($groupBy)
+		{
+			if (is_array($this->indexable) AND
+				array_search($groupBy, $this->indexable,
+				TRUE) === FALSE)
+				$groupBy = NULL;
+		}
+		$result['groupBy'] = $groupBy;
+
 
 		// Search
 		if (empty($this->searchable)) {
@@ -286,6 +300,7 @@ class BaseModel extends Model
 				'page' => $page,
 				'pageSize' => $pageSize,
 				'orderBy' => $orderBy,
+				'groupBy' => $groupBy,
 				'orderDirection' => $orderDirection,
 				'search' => $search,
 				'filters' => $filters,
@@ -306,6 +321,9 @@ class BaseModel extends Model
 					$cursor->where($col, $val);
 				}
 				$cursor->groupEnd();
+			}
+			if ($groupBy !== NULL) {
+				$cursor->groupBy($groupBy);
 			}
 
 			$count = $cursor->countAllResults(false);
@@ -369,27 +387,33 @@ class BaseModel extends Model
 			control_file_upload($event['data'], $name, $attr, NULL);
 		}
 		$event['data'] = $this->trigger('beforeChange', [
-			'id'=> 0, 'data' => $event['data'], 'existing' => NULL
+			'id'=> 0,
+			'data' => $event['data'],
+			'existing' => NULL,
+			'method' => CREATE,
 		])['data'];
 		return $event;
 	}
 
 	protected function executeBeforeUpdate($event) {
 		$id = $event['id'];
-		if (!($existing = $this->find($id)))
+		if (!($existing = $this->builder->get(null, 0, false)->getRow()))
 			throw new ValidationException("Not Found");
 		foreach ($this->fileUploadRules as $name => $attr) {
 			control_file_upload($event['data'], $name, $attr, $existing);
 		}
 		$event['data'] = $this->trigger('beforeChange', [
-			'id'=> $id, 'data' => $event['data'], 'existing' => $existing
+			'id'=> $id,
+			'data' => $event['data'],
+			'existing' => $existing,
+			'method' => UPDATE,
 		])['data'];
 		return $event;
 	}
 
 	protected function executeBeforeDelete($event) {
-		$id = $event['id'];
-		if (!($existing = $this->find($id)))
+		$id = $event['id'][0];
+		if (!($existing = $this->builder->get(null, 0, false)->getRow()))
 			throw new ValidationException("Data Not Found");
 		foreach ($this->fileUploadRules as $name => $attr) {
 			if ($existing->{$name}) {
@@ -397,7 +421,10 @@ class BaseModel extends Model
 			}
 		}
 		$this->trigger('beforeChange', [
-			'id'=> $id, 'data' => NULL, 'existing' => $existing
+			'id'=> $id,
+			'data' => NULL,
+			'existing' => $existing,
+			'method' => DELETE,
 		]);
 		return $event;
 	}

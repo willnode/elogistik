@@ -19,7 +19,7 @@ $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
-$routes->set404Override('\App\Controllers\Home::notFound');
+$routes->set404Override('\App\Controllers\Home::not_found');
 $routes->setAutoRoute(true);
 
 /**
@@ -32,6 +32,8 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->get('/login', 'Home::login');
+$routes->get('/check_retail', 'Home::check_retail');
+$routes->get('/uploads/(:any)/(:any)', 'Home::uploads/$1/$2');
 
 /**
  * --------------------------------------------------------------------
