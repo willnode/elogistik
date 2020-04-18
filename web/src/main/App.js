@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Switch, Route, withRouter } from "react-router-dom";
-import Admin, { Sidebar as AdminSidebar, Topbar as AdminTopbar } from '../admin';
-import StaticRooms from '../static/';
+import Admin, { Sidebar as AdminSidebar } from '../admin';
+import User, { Sidebar as UserSidebar } from '../user';
+import StaticRooms, { Topbar as StaticTopbar } from '../static/';
 import Layout from '../widget/layout';
 import { Context, TemporaryContext } from './Contexts';
 import { popMessages, login } from './Helper';
@@ -11,6 +12,7 @@ import { appKey } from './Config';
 const RoleRooms = (props) => (
   <Switch>
     <Route path="/admin" component={Admin} />
+    <Route path="/user" component={User} />
     <Route {...props} />
   </Switch>
 )
@@ -18,15 +20,18 @@ const RoleRooms = (props) => (
 const RoleSidebars = (props) => (
   <Switch>
     <Route path="/admin" component={login() && AdminSidebar} />
+    <Route path="/user" component={login() && UserSidebar} />
     <Route {...props} />
   </Switch>
 )
 
-const RoleTopbars = (props) => (
-  <Switch>
-    <Route path="/admin" component={login() && AdminTopbar} />
-    <Route {...props} />
-  </Switch>
+const RoleTopbars = ({component}) => (
+  <StaticTopbar component={component}/>
+  // <Switch>
+  //   <Route path="/admin" component={login() && AdminTopbar} />
+  //   <Route path="/user" component={login() && UserTopbar} />
+  //   <Route children={} />
+  // </Switch>
 )
 
 class App extends Component {

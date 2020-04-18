@@ -32,6 +32,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->get('/login', 'Home::login');
+$routes->add('/register', 'Home::register');
 $routes->get('/check_retail', 'Home::check_retail');
 $routes->get('/check_retail/(:any)', 'Home::check_retail/$1');
 $routes->get('/uploads/(:any)/(:any)', 'Home::uploads/$1/$2');

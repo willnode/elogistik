@@ -107,7 +107,6 @@ const doLogin = async (username, password, rememberme) => {
 		const storage = rememberme ? localStorage : sessionStorage;
 		storage.setItem(appKey + 'appauth', Context.get('auth'));
 		storage.setItem(appKey + 'applogin', JSON.stringify(login));
-		history().push('/' + login.role);
 		return login;
 	} catch (e) {
 		Context.set('auth', null);
@@ -147,6 +146,8 @@ const popMessages = () => {
 const formatRupiah = ((formatter) => (rp) => formatter.format(rp))(new Intl.NumberFormat('id-ID', {
 	style: 'currency',
 	currency: 'IDR',
+	maximumFractionDigits: 0,
+	minimumFractionDigits: 0,
 }))
 
 export {

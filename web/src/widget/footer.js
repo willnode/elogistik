@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Page from './page';
 
 export default function Footer() {
-	return (<Box mt={8} p={5} style={{ backgroundColor: '#020202', textAlign: 'center' }}>
+	return (<Box mt={8} p={5} style={{ backgroundColor: '#ac1900', textAlign: 'center' }}>
 		<Grid container spacing={3}>
 			<Grid item xs={12} sm={6}>
 				<Page>
@@ -18,9 +18,9 @@ export default function Footer() {
 				</Page>
 			</Grid>
 		</Grid>
-		<Typography variant="body2" color="textSecondary" align="center">
+		<Typography variant="body2" component="div" color="textSecondary" align="center">
 			<h3>Best Logistic</h3>
-			<p>Surabaya</p>
+			<p>Ruko Korem 084 Bhaskara Jaya Jl.Wisata Menanggal No.57 Surabaya</p>
 		</Typography>
 	</Box>)
 }

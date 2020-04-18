@@ -4,6 +4,7 @@ import Profile from './profile';
 import User from './user';
 import Page404 from '../static/404';
 import Sidebar from './sidebar';
+import Order from './order';
 import Topbar from './topbar';
 import { Switch, Route } from 'react-router-dom';
 import { CheckRole } from '../widget/controls';
@@ -15,6 +16,7 @@ export default function () {
 			<SEO title="Panel Admin"/>
 			<Switch>
 				<Route exact path="/admin" component={Dashboard} />
+				<Route path="/admin/order" component={Order} />
 				<Route path="/admin/profile" component={Profile} />
 				<Route path="/admin/user" component={User} />
 				<Route component={Page404} />

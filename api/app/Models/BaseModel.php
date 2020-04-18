@@ -138,6 +138,7 @@ class BaseModel extends Model
 	{
 		parent::__construct($db, $validation);
 		$this->beforeExecute[] = 'executeBeforeExecute';
+		$this->afterFind[] = 'executeAfterFind';
 		$this->beforeChange[] = 'executeBeforeChange';
 		$this->afterChange[] = 'executeAfterChange';
 		$this->beforeInsert[] = 'executeBeforeInsert';
@@ -441,6 +442,9 @@ class BaseModel extends Model
 		return $event;
 	}
 	protected function executeAfterChange($event) {
+		return $event;
+	}
+	protected function executeAfterFind($event) {
 		return $event;
 	}
 

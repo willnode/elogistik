@@ -134,8 +134,8 @@ function get_default_values($table, $field_key = NULL, $select = '*') {
 	return $values;
 }
 
-function get_values_at($table, $where) {
-	return Database::connect()->table($table)->where($where)->get()->getRow();
+function get_values_at($table, $where, $select = '*') {
+	return Database::connect()->table($table)->select($select)->where($where)->get()->getRow();
 }
 
 /**

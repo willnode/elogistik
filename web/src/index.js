@@ -21,7 +21,7 @@ function GenerateTheme() {
     palette: {
       background: {
         default: '#050505',
-        paper: '#111111f8',
+        paper: 'rgba(16, 16, 16, 0.95)',
       },
       primary: {
         light: '#ff833a',

@@ -1,6 +1,7 @@
 <?php namespace App\Controllers;
 
 use App\Models\LoginModel;
+use App\Models\ProfileModel;
 use App\Models\RetailCheckModel;
 use Config\Mimes;
 
@@ -32,6 +33,15 @@ class Home extends BaseController
 			]);
 		} else {
 			return load_401('Wrong Authentication', 'guest');
+		}
+	}
+
+	public function register()
+	{
+		if ($this->request->getMethod() === POST) {
+			return (new ProfileModel())->execute();
+		} else {
+			return load_405();
 		}
 	}
 

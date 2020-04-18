@@ -7,6 +7,7 @@ import MUISelect from '@material-ui/core/Select';
 import MUICheckbox from '@material-ui/core/Checkbox';
 import MenuItem from '@material-ui/core/MenuItem';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Box from '@material-ui/core/Box';
@@ -26,7 +27,7 @@ function controlDelete(url, redirect) {
 		(serverDelete(url)
 			.then(() => {
 				if (redirect) redirect(url)
-				window.setTimeout(() => setMessage('Successfully deleted'));
+				window.setTimeout(() => setMessage('Berhasil dihapus'));
 			})
 			.catch((e) => setError(e))
 		)
@@ -40,7 +41,7 @@ function controlPost(url, redirect) {
 		(serverPost(url, form)
 			.then((json) => {
 				if (redirect) redirect(json, form)
-				window.setTimeout(() => setMessage('Successfully saved'));
+				window.setTimeout(() => setMessage('Berhasil disimpan'));
 			}).catch((e) => setError(e))
 		)
 	}
@@ -70,7 +71,7 @@ const Input = ({ name, autoComplete, validator, ...props }) => {
 const Select = ({ name, label, options, validator, onChange, ...props }) => {
 	const ref = useRef();
 	useHandleControlValidator(validator, ref);
-	return <FormControl margin='normal' fullWidth helperText={validator && validator[0]}>
+	return <FormControl margin='normal' fullWidth>
 		<InputLabel
 			error={validator && !!validator[0]}
 			id={name + '-label'}
@@ -88,6 +89,7 @@ const Select = ({ name, label, options, validator, onChange, ...props }) => {
 				))
 			}
 		</MUISelect>
+		<FormHelperText>{validator && validator[0]}</FormHelperText>
 	</FormControl>
 }
 
@@ -115,12 +117,11 @@ const Submit = ({ label, color, variant, disabled, ...props }) => (
 	>{Context.get('fetching') ? 'Sending...' : label || "Submit"}</Button>
 )
 
-const Checkbox = ({ name, checked, value, color, label, ...props }) => (
+const Checkbox = ({ name, value, color, label, ...props }) => (
 	<Box textAlign="left" marginY={1} width="100%" clone>
 		<FormControlLabel
 			control={<MUICheckbox
 				name={name}
-				defaultChecked={checked}
 				value={value || "y"}
 				color={color || "primary"}
 				{...props}
@@ -142,54 +143,41 @@ const CommandButton = ({ name, value, label, color, variant, disabled }) => {
 	</Box>
 }
 
-const CommandButtonGroup = ({ label, children, ...props }) => {
+const FlexGroup = ({ label, children, ...props }) => {
 	return <Box display="flex" {...props}>
 		<Box flexGrow={1} className="MuiInputBase-root">{label}</Box>
 		{children}
 	</Box>
 }
 
-const File = ({ name, label, defaultValue, folder, readOnly, ...props }) => {
+const File = ({ name, label, defaultValue, folder, readOnly, required, ...props }) => {
 	const delRef = useRef();
 	const [file, hasFile] = useState();
 	return (
-		<CommandButtonGroup label={label}>
+		<FlexGroup label={label}>
 			<input name={name + "_delete"} ref={delRef} hidden />
 			<ButtonGroup>
-				{
-					[
-						...(file ? [<Button type="button" color="primary">1 File</Button>] : [])
-						,
-						<Button key="upload" disabled={readOnly} type="button"
-							variant={file ? 'contained' : 'outlined'} color="primary" component="label">
-							Upload
-							<input
-								name={name}
-								type="file"
-								hidden
-								onChange={(e) => hasFile(e.target.files.length)}
-								{...props}
-							/>
-						</Button>,
-						...(
-							defaultValue ? [
-								<Button key="download" type="button"
-									target="_blank" rel="noreferrer noopener" download
-									href={`${uploadsUrl}/${folder || name}/${defaultValue}`}>
-									View
-									</Button>
-								,
-								<Button key="delete" type="submit" color="secondary"
-									onClick={() => delRef.current.value = 'y'}
-									disabled={Context.get('fetching')}
-								>Delete</Button>
-							] : []
-						)
-
-					]
-				}
+				{file && <Button type="button" color="primary">1 File</Button>}
+				{!readOnly && <Button key="upload" disabled={readOnly} type="button"
+					variant={file ? 'contained' : 'outlined'} color="primary" component="label">
+					Upload
+					<input
+						name={name}	type="file"	hidden {...props}
+						onChange={(e) => hasFile(e.target.files.length)}
+						required={required && !defaultValue}
+					/>
+				</Button>}
+				{defaultValue && <Button key="download" type="button"
+					target="_blank" rel="noreferrer noopener" download
+					href={`${uploadsUrl}/${folder || name}/${defaultValue}`}>
+					View
+									</Button>}
+				{defaultValue && !readOnly && !required && <Button key="delete" type="submit" color="secondary"
+					onClick={() => delRef.current.value = 'y'}
+					disabled={Context.get('fetching')}
+				>Delete</Button>}
 			</ButtonGroup>
-		</CommandButtonGroup>
+		</FlexGroup>
 	)
 }
 
@@ -221,7 +209,7 @@ function RemoteTable({ src, itemKey, itemLabel, predefinedActions, title, action
 				isFreeAction: true,
 				onClick: () => history().push(`/${src}/create`)
 			}, {
-				icon: 'detail',
+				icon: 'input',
 				tooltip: 'Open ' + itemLabel,
 				onClick: (e, row) => history().push(`/${src}/detail/` + row[itemKey]),
 			}, {
@@ -269,7 +257,7 @@ export {
 	controlDelete,
 	CheckRole,
 	CommandButton,
-	CommandButtonGroup,
+	FlexGroup,
 	Input,
 	Select,
 	Form,

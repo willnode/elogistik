@@ -1,5 +1,6 @@
 <?php namespace App\Controllers;
 
+use App\Models\OrderModel;
 use App\Models\ProfileModel;
 use App\Models\UserModel;
 
@@ -12,6 +13,7 @@ class Admin extends BaseController
 		return load_info([
 			'routes'=>[
 				'/admin/user/',
+				'/admin/order/',
 				'/admin/profile/',
 			],
 		]);
@@ -25,5 +27,10 @@ class Admin extends BaseController
 	public function user($id = NULL)
 	{
 		return (new UserModel())->execute($id);
+	}
+
+	public function order($id = NULL)
+	{
+		return (new OrderModel())->execute($id);
 	}
 }

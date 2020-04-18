@@ -5,10 +5,10 @@ class ProfileModel extends BaseModel
 	protected $table = 'login';
 	protected $primaryKey = 'login_id';
 	protected $select = [
-		'login_id', 'username',	'email', 'name', 'avatar', 'role',
+		'login_id', 'username',	'email', 'name', 'avatar', 'role', 'hp'
 	];
 	protected $allowedFields = [
-		'name', 'email', 'avatar', 'password'
+		'name', 'email', 'hp', 'avatar', 'password'
 	];
 	protected $fileUploadRules = [
 		'avatar' => ['types' => ['jpg', 'jpeg', 'png', 'bmp']]

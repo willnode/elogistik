@@ -1,47 +1,77 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { useStyles, serverGet, history, extractForm } from '../main/Helper';
+import {  history, extractForm, doLogin, setError, login, setMessage } from '../main/Helper';
 import Page, { SEO } from '../widget/page';
-import { Input, Form, Submit, Checkbox } from '../widget/controls';
-import { Context } from '../main/Contexts';
-import { appKey } from '../main/Config';
+import { Input, Form, Submit, Checkbox, controlPost } from '../widget/controls';
+import { useState } from 'react';
+import {
+  useValidator, required, minLength, validEmail, validTel,
+  matchesField, checkAllValidators
+} from '../widget/validators';
 
 
-async function form_login(e) {
-  const data = extractForm(e);
-  Context.set('auth', 'Basic ' + btoa(data.get('username') + ':' + data.get('password')));
-  try {
-    const { login } = await serverGet('login');
-    history().push('/' + login.role);
-    Context.set('login', login);
-    const storage = data.has('rememberme') ? localStorage : sessionStorage;
-    storage.setItem(appKey + 'appauth', Context.get('auth'));
-    storage.setItem(appKey + 'applogin', JSON.stringify(login));
-  } catch {
-    Context.set('auth', null);
-  }
+async function form_register(e, callback) {
+  (
+    controlPost('register', (e, data) => {
+      (doLogin(
+        data.get('email'),
+        data.get('password'),
+        data.get('rememberme'))
+        .then(() => callback ? callback() : [setMessage('Berhasil terdaftar'), history().push('/'+login().role)])
+        .catch(() => setError('Login salah')));
+    })(e)
+  )
 }
 
-export default function Login() {
-  const classes = useStyles();
+function RegisterPage({ callback }) {
+  const validators = {
+    name: useValidator(required(), minLength(3)),
+    email: useValidator(required(), validEmail()),
+    tel: useValidator(required(), validTel()),
+    password: useValidator(required(), minLength(8)),
+    passconf: useValidator(matchesField('password')),
+  }
+  return (
+    <Form onSubmit={(e) => form_register(e, callback)}>
+      <Input validator={validators.name} name="name" label="Nama Lengkap" />
+      <Input validator={validators.email} name="email" label="Email" type="email" />
+      <Input validator={validators.tel} name="hp" label="Nomor HP (08xxx)" type="hp" />
+      <Input validator={validators.password} name="password" label="Password" type="password" minLength={8} autoComplete="new-password" />
+      <Input validator={validators.passconf} name="passconf" label="Ulangi Password" type="password" minLength={8} autoComplete="new-password" />
+      <Checkbox name="rememberme" label="Ingat saya" />
+      <Submit label="Daftar" disabled={!checkAllValidators(validators)} />
+    </Form>)
+}
 
+async function form_login(e, callback) {
+  const data = extractForm(e);
+  (doLogin(
+		data.get('username'),
+		data.get('password'),
+    data.get('rememberme'))
+    .then(() => callback ? callback() : [setMessage('Selamat datang'), history().push('/'+login().role)])
+    .catch(() => setError('Login salah')));
+}
+
+function LoginPage({ callback }) {
+  return <Form onSubmit={(e) => form_login(e, callback)}>
+    <Input name="username" required label="Username" />
+    <Input name="password" required label="Password" autoComplete="current-password" type="password" />
+    <Checkbox name="rememberme" label="Ingat saya" />
+    <Submit label="Sign In" />
+  </Form>
+}
+
+export default function Login({ callback }) {
+  const [has, setHas] = useState(true);
   return (
     <Page maxWidth="sm" center>
-      <SEO title="Login to CRM Toolkit" />
-      <Avatar className={classes.avatar}>
-        <LockOutlinedIcon />
-      </Avatar>
       <Typography component="h1" variant="h5">
-        Sign in
-        </Typography>
-      <Form onSubmit={form_login}>
-        <Input name="username" required label="Username" />
-        <Input name="password" required label="Password" autoComplete="current-password" type="password" />
-        <Checkbox name="rememberme" label="Remember me" />
-        <Submit label="Sign In" />
-      </Form>
+        {has ? "Masuk" : "Daftar"}
+      </Typography>
+
+      <Checkbox label="Sudah punya akun?" checked={has} onChange={(e) => setHas(e.target.checked)} />
+      {has ? <LoginPage callback={callback} /> : <RegisterPage callback={callback} />}
     </Page>
   );
 }

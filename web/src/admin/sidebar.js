@@ -3,6 +3,7 @@ import { DrawerComponent, DrawerListItem } from '../widget/drawer';
 import List from '@material-ui/core/List';
 import Dashboard from '@material-ui/icons/Dashboard';
 import SupervisedUserCircle from '@material-ui/icons/SupervisedUserCircle';
+import LocalShipping from '@material-ui/icons/LocalShipping';
 
 
 export default function () {
@@ -11,6 +12,7 @@ export default function () {
 			<List>
 				<DrawerListItem  to="/admin/" icon={Dashboard} label="Dashboard"/>
 				<DrawerListItem  to="/admin/user" icon={SupervisedUserCircle} label="Users"/>
+				<DrawerListItem  to="/admin/order" icon={LocalShipping} label="Order"/>
 			</List>
 		</DrawerComponent>
 	)

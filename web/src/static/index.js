@@ -7,8 +7,9 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { login } from '../main/Helper';
 import Order from './order';
 import Layanan from './layanan';
-import Portofolio from './portofolio';
+import Galeri from './galeri';
 import About from './about';
+import Topbar from './topbar';
 
 function RedirectIfLoggedInOrShow({ component }) {
 	return login() ? <Redirect to={'/' + login().role + '/'} /> : React.createElement(component);
@@ -20,11 +21,15 @@ export default function Static() {
 		<Route exact path="/offline" component={Offline} />
 		<Route exact path="/layanan" component={Layanan} />
 		<Route exact path="/order" component={Order} />
-		<Route exact path="/portofolio" component={Portofolio} />
+		<Route exact path="/galeri" component={Galeri} />
 		<Route exact path="/about" component={About} />
 		<Route exact path="/login">
 			<RedirectIfLoggedInOrShow component={Login} />
 		</Route>
 		<Route component={Page404} />
 	</Switch>
+}
+
+export {
+	Topbar
 }
