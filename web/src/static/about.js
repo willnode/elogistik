@@ -10,7 +10,7 @@ export default function About() {
 	}
 	return (<Page center>
 		<h1>Tentang Best Logistic</h1>
-		<p>Best Logistics adalah Perusahaan Container......</p>
+		<p>Best Logistics Surabaya adalah perusahaan yang bergerak dibidang ekspedisi/logistic/pengiriman barang, anda dapat melihat hasil kerja kami di <link to="/galeri">gallery</link>minat menggunakan dengan jasa kami ? silahkan klik <link to="/order">order</link>atau jika anda ingin bertanya-tanya, silahkan hubungi salah satu "admin" kami</p>
 		<h2>Crew</h2>
 		<Grid container justify="center" spacing={2}>
 			<Grid item md={6} lg={4} xl={2}><Img src={1} /></Grid>
