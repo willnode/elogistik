@@ -23,7 +23,11 @@ a {
 }
 
 .gallery-slider.company, .gallery-slider.company img {
-    height: 600px;
+    height: 1100px;
+}
+
+.gallery-slider.compact, .gallery-slider.compact img {
+    height: 400px;
 }
 
 .gallery-slider.header, .gallery-slider.header img {

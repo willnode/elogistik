@@ -40,7 +40,8 @@ export function ButtonDropdown({ label, children }) {
 		>
 			{label}
 	 </Button>
-		<Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+		<Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal
+				style={{zIndex: 1}}>
 			{({ TransitionProps, placement }) => (
 				<Grow
 					{...TransitionProps}
@@ -65,6 +66,7 @@ export default function Topbar({ component }) {
 		<Button component={component} to="/order">Order</Button>
 		<ButtonDropdown label="Layanan">
 			<MenuItem component={component} to="/layanan/darat">Layanan Darat</MenuItem>
+			<MenuItem component={component} to="/layanan/laut">Layanan Laut</MenuItem>
 			<MenuItem component={component} to="/layanan/udara">Layanan Udara</MenuItem>
 		</ButtonDropdown>
 		<Button component={component} to="/company">Company</Button>

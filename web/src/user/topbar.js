@@ -34,11 +34,11 @@ export default function () {
 			<AvatarMenu anchorEl={open} open={!!open} onClose={() => setOpen(null)} >
 				<MenuItem component={Link} to="/admin">
 					<ListItemIcon children={<Dashboard/>}/>
-					<ListItemText children="Dashboard"/>
+					<ListItemText children="Beranda"/>
 				</MenuItem>
 				<MenuItem component={Link} to="/admin/profile">
 					<ListItemIcon children={<People/>}/>
-					<ListItemText children="Profile"/>
+					<ListItemText children="Profil"/>
 				</MenuItem>
 				<MenuItem onClick={doLogout}>
 					<ListItemIcon children={<ExitToApp/>}/>

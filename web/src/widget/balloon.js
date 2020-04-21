@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import Typography from '@material-ui/core/Typography';
-import Hidden from '@material-ui/core/Hidden';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -39,12 +38,10 @@ export default function Balloon() {
 			}}
 			title={<Box marginTop={2} textAlign="center">
 				<Typography>
-					Selamat Datang di Best Logistic. Ada yang perlu kami bantu?
+					Contact our Costumer Service
 				</Typography>
-				<Hidden xsDown implementation="css">
-					<img src={publicUrl+"/assets/Chat.png"} alt=""
-						style={{objectFit: 'contain', margin: '1em 0'}} width="100%" height="250px"/>
-				</Hidden>
+				<img src={publicUrl + "/assets/Chat.png"} alt=""
+					style={{ objectFit: 'contain', margin: '1em 0' }} width="100%" height="250px" />
 				<Paper component="form" action="https://wa.me/6287825119580">
 					<InputBase
 						inputRef={ref}
@@ -64,15 +61,18 @@ export default function Balloon() {
 					<Button variant="text">
 						<Box clone marginRight={1}><WAIcon /></Box>
 					</Button>
-					<Button component="a" target="_blank" rel="noopener noreferrer" href="https://wa.me/6287825119580">
-						Hamz
-					</Button>
-					<Button component="a" target="_blank" rel="noopener noreferrer" href="https://wa.me/6282334573264">
-						Desy
-					</Button>
-					<Button component="a" target="_blank" rel="noopener noreferrer" href="https://wa.me/6282244024042">
-						Atha
-					</Button>
+					{
+						Object.entries({
+							Hamz: '6287825119580',
+							Desy: '6282334573264',
+							Atha: '6282244024042',
+						}).map(([name, hp]) =>
+							<Button component="a" key={name} target="_blank" rel="noopener noreferrer"
+								href={`https://wa.me/${hp}?text=Halo+Best+Logistic,+Saya+Ingin+Menanyakan+Sesuatu,+Dapatkah+Anda+Membantu+Saya`}>
+								{name}
+							</Button>
+						)
+					}
 				</ButtonGroup>
 			</Box>}
 		>

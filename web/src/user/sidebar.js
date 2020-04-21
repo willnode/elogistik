@@ -10,8 +10,8 @@ export default function () {
 	return (
 		<DrawerComponent>
 			<List>
-				<DrawerListItem  to="/user/" icon={Dashboard} label="Dashboard"/>
-				<DrawerListItem  to="/user/profile" icon={People} label="Profile"/>
+				<DrawerListItem  to="/user/" icon={Dashboard} label="Beranda"/>
+				<DrawerListItem  to="/user/profile" icon={People} label="Profil"/>
 				<DrawerListItem  to="/user/order" icon={LocalShipping} label="Order"/>
 			</List>
 		</DrawerComponent>

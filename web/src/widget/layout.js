@@ -18,9 +18,9 @@ function Notification() {
 	</>
 }
 
-function Gallery() {
+const Gallery = React.memo(function() {
 	return <><div className="gallery-slider header">
-		<Slider infinite>
+		<Slider infinite autoplay arrows={false} pauseOnHover={false}>
 			{
 				[1, 2, 3, 4, 5, 6, 7, 8].map((x) =>
 					<img src={`${publicUrl}/assets/gallery/${x}.jpg`} alt="" key={x} />
@@ -30,7 +30,7 @@ function Gallery() {
 	</div>
 	<div className="marquee"><p><span>Best Logistic</span> - Best Team Best Partner Best Logistic</p></div>
 	</>
-}
+})
 
 
 export default function Layout({ children }) {

@@ -11,9 +11,9 @@ export default function () {
 	return (
 		<DrawerComponent>
 			<List>
-				<DrawerListItem  to="/admin/" icon={Dashboard} label="Dashboard"/>
-				<DrawerListItem  to="/admin/profile" icon={People} label="Profile"/>
-				<DrawerListItem  to="/admin/user" icon={SupervisedUserCircle} label="Users"/>
+				<DrawerListItem  to="/admin/" icon={Dashboard} label="Beranda"/>
+				<DrawerListItem  to="/admin/profile" icon={People} label="Profil"/>
+				<DrawerListItem  to="/admin/user" icon={SupervisedUserCircle} label="Pengguna"/>
 				<DrawerListItem  to="/admin/order" icon={LocalShipping} label="Order"/>
 			</List>
 		</DrawerComponent>

@@ -55,7 +55,7 @@ async function form_login(e, callback) {
 
 function LoginPage({ callback }) {
   return <Form onSubmit={(e) => form_login(e, callback)}>
-    <Input name="username" required label="Username" />
+    <Input name="username" required label="Email / No. HP" />
     <Input name="password" required label="Password" autoComplete="current-password" type="password" />
     <Checkbox name="rememberme" label="Ingat saya" />
     <Submit label="Sign In" />

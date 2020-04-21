@@ -2,11 +2,21 @@ import React from 'react';
 import Page from '../widget/page';
 import { Link, Route } from 'react-router-dom';
 import { Context } from '../main/Contexts';
-
+import Slider from "react-slick";
+import { publicUrl } from '../main/Config';
 
 function Darat() {
 	return <>
-		<h2>Jalur Pengiriman Darat</h2>
+		<h1>Jalur Pengiriman Darat</h1>
+		<div className="gallery-slider compact">
+			<Slider infinite>
+				{
+					[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((x) =>
+						<img src={`${publicUrl}/assets/armada/${x}.jpeg`} alt="" key={x} />
+					)
+				}
+			</Slider>
+		</div>
 		<p>Salah satu model atau jenis pengiriman yang seringkali ditawarkan sebuah perusahaan adalah trucking. Berdasarkan pengertian secara luas, pengiriman trucking merupakan layanan pengiriman menggunakan jalur darat dengan armada truk maupun mobil. Selain itu jarak antarnya mulai dari antar kota bahkan sampai luar pulau sekalipun dimana barang kiriman dijadikan satu di dalam box atau bagasi. Oleh karena itulah mengapa harga trucking jauh lebih murah bila dibandingkan dengan jasa lain seperti udara yang menggunakan pesawat maupun kapal tertentu. Namun begitu estimasi waktu juga terbilang cepat karena tiap truk dan mobil pengangkut barang akan dibatasi jarak kota tujuan yang tak terlalu jauh. Apabila berada di luar pulau maka waktu tempuh lebih lama dari perkiraan karena adanya berbagai macam faktor seperti keadaan jalan, cuaca, lingkungan sekitar, dan lain sebagainya.</p>
 
 		<h2>Keunggulan Menggunakan Jasa Trucking Barang</h2>
@@ -25,13 +35,15 @@ function Darat() {
 
 function Laut() {
 	return <>
+		<h1>Jalur Pengiriman Laut</h1>
 		<p>layanan pengiriman kargo dan barang berbasis ekspedisi murah terbaik melalui jalur laut menggunakan berbagai jenis kapal, mulai dari kapal Pelni, kapal Roro &amp; kapal lainnya.</p>
+		<p>Anda dapat melihat hasil kerja kami di <Link to="/galeri">gallery</Link>minat menggunakan dengan jasa kami ? silahkan klik <Link to="/order">order</Link>atau jika anda ingin bertanya-tanya, silahkan hubungi salah satu <a href="#/" onClick={() => Context.set('balloon', true)}>admin</a> kami.</p>
 	</>
 }
 
 function Udara() {
 	return <>
-		<h2>Jalur Pengiriman Udara</h2>
+		<h1>Jalur Pengiriman Udara</h1>
 
 		<h3>Pengerian / Definisi Cargo</h3>
 
@@ -102,9 +114,11 @@ function Udara() {
 		<p>Anda dapat melihat hasil kerja kami di <Link to="/galeri">gallery</Link>minat menggunakan dengan jasa kami ? silahkan klik <Link to="/order">order</Link>atau jika anda ingin bertanya-tanya, silahkan hubungi salah satu <a href="#/" onClick={() => Context.set('balloon', true)}>admin</a> kami.</p>
 	</>
 }
+
 export default function Layanan() {
 	return (<Page textAlign="justify" maxWidth="md">
 		<Route path="/layanan/darat" component={Darat} />
+		<Route path="/layanan/laut" component={Laut} />
 		<Route path="/layanan/udara" component={Udara} />
 	</Page>)
 }
