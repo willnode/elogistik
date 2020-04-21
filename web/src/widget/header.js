@@ -8,7 +8,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { useStyles, login, doLogout } from '../main/Helper';
 import { Link } from 'react-router-dom';
 import { RoleTopbars } from '../main/App';
-import { withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import { publicUrl } from '../main/Config';
 import { Context } from '../main/Contexts';

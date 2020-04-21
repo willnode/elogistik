@@ -75,3 +75,10 @@ export default function Login({ callback }) {
     </Page>
   );
 }
+
+export function LoginWithSEO () {
+  return <>
+  <SEO title="Masuk" description="Masuk ke Member Area"/>
+  <Login />
+  </>
+}

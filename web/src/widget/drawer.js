@@ -32,7 +32,7 @@ function DrawerComponent({ children }) {
 	useEffect(() => (() => Context.unbind('drawerOpen')), [])
 	return (
 		<nav className="sidebar">
-			<Hidden smUp implementation="css">
+			<Hidden smUp>
 				<Drawer
 					variant="temporary"
 					classes={{
@@ -49,7 +49,7 @@ function DrawerComponent({ children }) {
 					</div>
 				</Drawer>
 			</Hidden>
-			<Hidden xsDown implementation="css">
+			<Hidden xsDown>
 				<Box py={2} my={8} marginLeft={2} clone>
 					<Paper className={classes.content}>
 						<div className={classes.drawerContainer}>
@@ -64,7 +64,7 @@ function DrawerComponent({ children }) {
 export default function () {
 	return <RoleSidebars>
 		<DrawerComponent>
-			<Hidden smUp implementation="css">
+			<Hidden smUp>
 				<List>
 					<ListItem>
 						<ListItemText primary="Menu" />

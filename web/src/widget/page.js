@@ -7,11 +7,12 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { serverGet } from '../main/Helper';
 import { useTheme } from '@material-ui/core/styles';
 import { Helmet } from 'react-helmet';
+import { titlePostFix } from '../main/Config';
 
 function SEO({ title, description, image, url }) {
 	return <Helmet>
 		{/* General tags */}
-		{title ? <title>{title}</title> : null}
+		{title ? <title>{title + ((titlePostFix && title && " | ") || '') + titlePostFix}</title> : null}
 		{description ? <meta name="description" content={description} /> : null}
 		{image ? <meta name="image" content={image} /> : null}
 		{url ? <link rel="canonical" href={url} /> : null}	{/* OpenGraph tags */}

@@ -3,7 +3,6 @@ import Page from '../../widget/page';
 import {
 	Form, Input, Submit, BackButton,
 	Select,
-	FlexGroup,
 	File
 } from '../../widget/controls';
 import { useParams } from 'react-router-dom';

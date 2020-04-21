@@ -6,6 +6,8 @@ import Alert from '@material-ui/lab/Alert';
 import Box from '@material-ui/core/Box';
 import Balloon from './balloon';
 import { Context } from '../main/Contexts';
+import Slider from "react-slick";
+import { publicUrl } from '../main/Config';
 
 function Notification() {
 	Context.bind('message', useState(null));
@@ -16,11 +18,26 @@ function Notification() {
 	</>
 }
 
+function Gallery() {
+	return <><div className="gallery-slider header">
+		<Slider infinite>
+			{
+				[1, 2, 3, 4, 5, 6, 7, 8].map((x) =>
+					<img src={`${publicUrl}/assets/gallery/${x}.jpg`} alt="" key={x} />
+				)
+			}
+		</Slider>
+	</div>
+	<div className="marquee"><p><span>Best Logistic</span> - Best Team Best Partner Best Logistic</p></div>
+	</>
+}
+
 
 export default function Layout({ children }) {
 	return (
 		<>
 			<Header />
+			<Gallery />
 			<Box display="flex">
 				<Drawer />
 				<Box p={2} flexGrow={1} component="main">

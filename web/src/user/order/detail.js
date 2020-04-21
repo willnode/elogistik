@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import Page from '../../widget/page';
 import {
-	Form, Input, Submit, BackButton,
-	CommandButton, FlexGroup, File, Select
+	Form, Submit, BackButton, FlexGroup, File, Select
 } from '../../widget/controls';
 import { useParams } from 'react-router-dom';
-import Box from '@material-ui/core/Box';
 import { doReload, history } from '../../main/Helper';
 
 const statusDict = {
@@ -32,7 +30,7 @@ export default function () {
 				<Form action={"user/order/" + id} redirect={id > 0 ? doReload : (json) => history().push('/user/order/detail/' + json.id)}>
 					<FlexGroup marginY={2} label="Status Barang">{statusDict[data.order_status]}</FlexGroup>
 					{
-						data.order_status == 'bayar' && <>
+						data.order_status === 'bayar' && <>
 							<Select name="order_kind" label="Jenis Pembayaran"
 								defaultValue={data.order_kind}
 								options={{
