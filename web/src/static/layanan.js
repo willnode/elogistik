@@ -23,6 +23,12 @@ function Darat() {
 	</>;
 }
 
+function Laut() {
+	return <>
+		<p>layanan pengiriman kargo dan barang berbasis ekspedisi murah terbaik melalui jalur laut menggunakan berbagai jenis kapal, mulai dari kapal Pelni, kapal Roro &amp; kapal lainnya.</p>
+	</>
+}
+
 function Udara() {
 	return <>
 		<h2>Jalur Pengiriman Udara</h2>
