@@ -56,7 +56,10 @@ export default function Layanan() {
 			anda dapat melihat hasil kerja kami di <link to="/galeri">gallery</link>minat menggunakan dengan jasa kami ? silahkan klik <link to="/order">order</link>atau jika anda ingin bertanya-tanya, silahkan hubungi salah satu "admin" kami.
 		</TabPanel>
 		<TabPanel value={value} index={1}>
-			Logistik Laut
+			Jalur Pengiriman Laut 
+			layanan pengiriman kargo dan barang berbasis ekspedisi murah terbaik melalui jalur laut menggunakan berbagai jenis kapal, mulai dari kapal Pelni, kapal Roro & kapal lainnya.
+
+			anda dapat melihat hasil kerja kami di <link to="/galeri">gallery</link>minat menggunakan dengan jasa kami ? silahkan klik <link to="/order">order</link>atau jika anda ingin bertanya-tanya, silahkan hubungi salah satu "admin" kami.
 		</TabPanel>
 		<TabPanel value={value} index={2}>
 			Jalur Pengiriman Udara
