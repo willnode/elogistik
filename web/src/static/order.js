@@ -14,6 +14,7 @@ function RealOrder({ id, ok, setOk }) {
 	const [p, setP] = React.useState(0);
 	const [l, setL] = React.useState(0);
 	const [t, setT] = React.useState(0);
+	const [mode, setMode] = React.useState('volume');
 	const [qty, setQty] = React.useState(1);
 	const [berat, volume] = useMemo(() => {
 		let patokan = (data && data.retail_jalur === 'Udara') ? 6000 : 4000;
@@ -31,18 +32,22 @@ function RealOrder({ id, ok, setOk }) {
 	return <Page src={`check_retail/${id}`} dataCallback={(x) => setData(x.data)}>
 		{data && <div>
 			<input type="hidden" readOnly name="order_retail" value={id} />
-			<Input name="order_kg" type="number" inputProps={{ min: 0 }} label="Berat (KG)" value={kg} onChange={(e) => setKg(e.target.value)} />
-			<Grid container spacing={3}>
-				<Grid item xs={12} sm={4}>
-					<Input name="order_p" type="number" inputProps={{ min: 0 }} label="Panjang (CM)" value={p} onChange={(e) => setP(e.target.value)} />
+			<Select value={mode} options={{berat: "Berat", volume: "Volume"}} onChange={(x) => setMode(x.target.value)} />
+			{
+				mode === 'berat' ? <Input name="order_kg" type="number"
+				inputProps={{ min: 0 }} label="Berat (KG)" value={kg} onChange={(e) => setKg(e.target.value)} />
+				: <Grid container spacing={3}>
+					<Grid item xs={12} sm={4}>
+						<Input name="order_p" type="number" inputProps={{ min: 0 }} label="Panjang (CM)" value={p} onChange={(e) => setP(e.target.value)} />
+					</Grid>
+					<Grid item xs={12} sm={4}>
+						<Input name="order_l" type="number" inputProps={{ min: 0 }} label="Lebar (CM)" value={l} onChange={(e) => setL(e.target.value)} />
+					</Grid>
+					<Grid item xs={12} sm={4}>
+						<Input name="order_t" type="number" inputProps={{ min: 0 }} label="Tinggi (CM)" value={t} onChange={(e) => setT(e.target.value)} />
+					</Grid>
 				</Grid>
-				<Grid item xs={12} sm={4}>
-					<Input name="order_l" type="number" inputProps={{ min: 0 }} label="Lebar (CM)" value={l} onChange={(e) => setL(e.target.value)} />
-				</Grid>
-				<Grid item xs={12} sm={4}>
-					<Input name="order_t" type="number" inputProps={{ min: 0 }} label="Tinggi (CM)" value={t} onChange={(e) => setT(e.target.value)} />
-				</Grid>
-			</Grid>
+			}
 			<FlexGroup label="Estimasi Harga Berat per KG" marginY={2}>
 				{berat} KG &times; {formatRupiah(parseInt(data.retail_perkg))} = {formatRupiah(berat * parseInt(data.retail_perkg))}
 			</FlexGroup>

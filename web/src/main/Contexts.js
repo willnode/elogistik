@@ -23,6 +23,7 @@ class ContextInstance {
 	// Send useState() values here every render call
 	bind(param, state) {
 		this.states[param] = state;
+		return state;
 	}
 	// Prevent state leaks by calling this before unmount.
 	unbind(param) {

@@ -1,6 +1,30 @@
 body {
 	background: url('./main/logo\ best.svg');
-	background-size: 80vh;
+    background-size: 50vh;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 50%;
+    background-attachment: fixed;
+}
+
+a {
+	color: #ff833a
+}
+
+.gallery-slider {
+    width: 100%;
+    height: 400px;
+    position: relative;
+}
+.gallery-slider > * {
+    position: absolute;
+    width: 100%;
+}
+.gallery-slider img {
+    width: 100%;
+    height: 400px;
+    object-fit: contain;
+}
+
+.sidebar {
+    min-width: 250px;
 }

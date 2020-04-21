@@ -68,8 +68,8 @@ class OrderModel extends BaseModel
 			if (isset($data['order_retail'])) {
 				$retail = Database::connect()->table('retail')->where('retail_id', $data['order_retail'])->get()->getRow();
 				if ($retail) {
-					$volume = $data['order_p'] * $data['order_l'] * $data['order_t'];
-					$berat = max($data['order_kg'], $volume / ($retail->retail_jalur === 'Udara' ? 6000 : 4000));
+					$volume = ($data['order_p'] ?? 0) *( $data['order_l'] ?? 0) * ($data['order_t'] ?? 0);
+					$berat = max($data['order_kg'] ?? 0, $volume / ($retail->retail_jalur === 'Udara' ? 6000 : 4000));
 					$volume = $volume * ($retail->retail_kubikasi / 100000.0);
 					if ($berat < 100) {
 						throw new ValidationException("Too skinny");

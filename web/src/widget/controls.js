@@ -157,9 +157,9 @@ const File = ({ name, label, defaultValue, folder, readOnly, required, ...props 
 		<FlexGroup label={label}>
 			<input name={name + "_delete"} ref={delRef} hidden />
 			<ButtonGroup>
-				{file && <Button type="button" color="primary">1 File</Button>}
+				{file && <Button type="button">1 File</Button>}
 				{!readOnly && <Button key="upload" disabled={readOnly} type="button"
-					variant={file ? 'contained' : 'outlined'} color="primary" component="label">
+					variant={file ? 'contained' : 'outlined'} component="label">
 					Upload
 					<input
 						name={name}	type="file"	hidden {...props}
@@ -172,7 +172,7 @@ const File = ({ name, label, defaultValue, folder, readOnly, required, ...props 
 					href={`${uploadsUrl}/${folder || name}/${defaultValue}`}>
 					View
 									</Button>}
-				{defaultValue && !readOnly && !required && <Button key="delete" type="submit" color="secondary"
+				{defaultValue && !readOnly && !required && <Button key="delete" type="submit"
 					onClick={() => delRef.current.value = 'y'}
 					disabled={Context.get('fetching')}
 				>Delete</Button>}

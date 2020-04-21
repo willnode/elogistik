@@ -15,6 +15,7 @@ import WAIcon from '@material-ui/icons/WhatsApp';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
 import { publicUrl } from '../main/Config';
+import { Context } from '../main/Contexts';
 
 
 const HtmlTooltip = withStyles((theme) => ({
@@ -29,7 +30,7 @@ const HtmlTooltip = withStyles((theme) => ({
 
 
 export default function Balloon() {
-	const [open, setOpen] = useState(false);
+	const [open, setOpen] = Context.bind('balloon', useState(false));
 	const ref = React.useRef();
 	return <Box position="fixed" bottom={8} right={12}>
 		<HtmlTooltip open={open} arrow interactive

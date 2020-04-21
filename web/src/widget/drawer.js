@@ -31,7 +31,7 @@ function DrawerComponent({ children }) {
 	Context.bind('drawerOpen', useState(false));
 	useEffect(() => (() => Context.unbind('drawerOpen')), [])
 	return (
-		<nav>
+		<nav className="sidebar">
 			<Hidden smUp implementation="css">
 				<Drawer
 					variant="temporary"

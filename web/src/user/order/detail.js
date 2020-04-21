@@ -26,20 +26,26 @@ export default function () {
 
 
 	return (
-		<Page noStyle={false} src={'user/order/' + id} dataCallback={setData}>
+		<Page noStyle={false} maxWidth="md" src={'user/order/' + id} dataCallback={setData}>
 			<h1>Masih WIP</h1>
 			{!data ? '' : (
-				<Form action={"user/order/" + id} redirect={id > 0 ? doReload : (json) => history().push('/user/order/detail/'+json.id)}>
+				<Form action={"user/order/" + id} redirect={id > 0 ? doReload : (json) => history().push('/user/order/detail/' + json.id)}>
 					<FlexGroup marginY={2} label="Status Barang">{statusDict[data.order_status]}</FlexGroup>
-					{data.order_status == 'bayar' && <Select name="order_kind" label="Jenis Pembayaran"  defaultValue={data.order_kind}
-					options={{
-						'50': 'DP 50%',
-						'70': 'DP 70%',
-						'100': 'Bayar Penuh',
-					}} required/>}
-					{data.order_status == 'bayar' && <File name="order_payment" label="Struk" folder="payment" defaultValue={data.order_payment}
-					required={!data.order_payment}/>}
-					<Submit />
+					{
+						data.order_status == 'bayar' && <>
+							<Select name="order_kind" label="Jenis Pembayaran"
+								defaultValue={data.order_kind}
+								options={{
+									'50': 'DP 50%',
+									'70': 'DP 70%',
+									'100': 'Bayar Penuh',
+								}} required />
+							<File name="order_payment" label="Struk" folder="payment"
+								defaultValue={data.order_payment}
+								required={!data.order_payment} />
+							<Submit />
+						</>
+					}
 				</Form>)}
 			<BackButton />
 		</Page>)

@@ -6,6 +6,8 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import * as serviceWorker from './serviceWorker';
 import { publicUrl } from './main/Config';
 import App from './main/App';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import './style.css';
 
 function GenerateTheme() {
@@ -21,7 +23,7 @@ function GenerateTheme() {
     palette: {
       background: {
         default: '#050505',
-        paper: 'rgba(16, 16, 16, 0.95)',
+        paper: 'rgba(16, 16, 16, 0.9)',
       },
       primary: {
         light: '#ff833a',
@@ -30,9 +32,9 @@ function GenerateTheme() {
         contrastText: '#fff',
       },
       secondary: {
-        light: '#484848',
-        main: '#212121',
-        dark: '#000000',
+        light: '#999999',
+        main: '#777777',
+        dark: '#555555',
         contrastText: '#fff',
       },
       type: 'dark',

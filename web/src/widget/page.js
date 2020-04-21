@@ -30,14 +30,14 @@ function SEO({ title, description, image, url }) {
 const Container = ({ children, noStyle, maxWidth, center, ...props }) => {
 	return noStyle ? children : (
 		<MUIContainer maxWidth={maxWidth}>
-			<Box p={3} my={5} clone
+			<Box p={3} my={5} clone  {...props}
 				{...(center ? {
 					display: 'flex',
 					flexDirection: 'column',
 					alignItems: 'center',
 					textAlign: 'center'
 				} : {})}>
-				<Paper {...props}>{children}</Paper>
+				<Paper>{children}</Paper>
 			</Box>
 		</MUIContainer>
 	)

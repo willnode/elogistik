@@ -27,7 +27,6 @@ export default function Header() {
         <Toolbar variant="dense">
           <Hidden smUp implementation="css">
             <IconButton
-
               aria-label="open drawer"
               edge="start"
               onClick={() => Context.set('drawerOpen', true)}

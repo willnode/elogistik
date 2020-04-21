@@ -2,6 +2,7 @@ import React from 'react';
 import Page from '../widget/page';
 import Grid from '@material-ui/core/Grid';
 import { publicUrl } from '../main/Config';
+import { Link } from 'react-router-dom';
 
 
 export default function About() {
@@ -10,7 +11,7 @@ export default function About() {
 	}
 	return (<Page center>
 		<h1>Tentang Best Logistic</h1>
-		
+
 		<p>ini adalah kami</p>
 		<h2>Crew</h2>
 		<Grid container justify="center" spacing={2}>
@@ -20,6 +21,6 @@ export default function About() {
 			<Grid item md={6} lg={4} xl={2}><Img src={4} /></Grid>
 			<Grid item md={6} lg={4} xl={2}><Img src={5} /></Grid>
 		</Grid>
-		<p>anda dapat melihat hasil kerja kami di <link to="/galeri">gallery</link>minat menggunakan dengan jasa kami ? silahkan klik <link to="/order">order</link>atau jika anda ingin bertanya-tanya, silahkan hubungi salah satu "admin" kami</p>
+		<p>anda dapat melihat hasil kerja kami di <Link to="/galeri">gallery</Link>minat menggunakan dengan jasa kami ? silahkan klik <Link to="/order">order</Link>atau jika anda ingin bertanya-tanya, silahkan hubungi salah satu "admin" kami</p>
 	</Page>)
 }
