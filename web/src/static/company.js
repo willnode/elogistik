@@ -7,6 +7,7 @@ export default function Company() {
 	return (<Page textAlign="center" maxWidth="md">
 		<SEO title="Company Profile" />
 		<h1>Company Profile</h1>
+		<p>Company profile kami dapat memberikan anda informasi tentang Best Logistic Surabaya, mulai dari didirikannya Best Logistic Surabaya, legalitas, dan beberapa dokumentasi tentang apa yang kami lakukan </p>
 		<div className="gallery-slider company">
 			<Slider infinite>
 				{

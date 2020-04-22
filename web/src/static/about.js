@@ -12,7 +12,7 @@ export default function About() {
 	return (<Page center>
 		<h1>Tentang Best Logistic</h1>
 
-		<p>ini adalah kami</p>
+		<p>Kami adalah Best Logistics Surabaya, perusahaan yang bergerak dibidang jasa pengiriman barang / cargo atau ekspedisi </p>
 		<h2>Crew</h2>
 		<Grid container justify="center" spacing={2}>
 			<Grid item md={6} lg={4} xl={2}><Img src={1} /></Grid>
