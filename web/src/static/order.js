@@ -48,19 +48,13 @@ function RealOrder({ id, ok, setOk }) {
 					</Grid>
 				</Grid>
 			}
-			<FlexGroup label="Estimasi Harga Berat per KG" marginY={2}>
-				{berat} KG &times; {formatRupiah(parseInt(data.retail_perkg))} = {formatRupiah(berat * parseInt(data.retail_perkg))}
-			</FlexGroup>
-			{data.retail_kubikasi > 0 && <FlexGroup label="Estimasi Harga Volume per M3" marginY={2}>
-				{volume} M3 &times; {formatRupiah(parseInt(data.retail_kubikasi))} = {formatRupiah(volume * parseInt(data.retail_kubikasi))}
-			</FlexGroup>}
 			<Input name="order_qty" type="number" inputProps={{ min: 1 }} label="Jumlah Barang" value={qty} onChange={(e) => setQty(e.target.value)} />
 			<FlexGroup label="Total Harga" marginY={2}>
 				{formatRupiah(harga)}
 			</FlexGroup>
 
 			<Alert style={{margin: '1rem 0'}} severity={ok ? "info" : "warning"}>{!ok ? 'Minimal order adalah 100 KG' : 'Harga belum termasuk packing dan asuransi'}</Alert>
-			{ok && <Alert style={{margin: '1rem 0'}} severity={login() ? "info" : "warning"}>{!login() ? 'Data order anda akan dimasukkan ke akun anda' : 'Anda perlu masuk untuk melanjutkan'}</Alert>}
+			{ok && <Alert style={{margin: '1rem 0'}} severity={login() ? "info" : "warning"}>{login() ? 'Data order anda akan dimasukkan ke akun anda' : 'Anda perlu masuk untuk melanjutkan'}</Alert>}
 		</div>}
 	</Page>
 }
@@ -81,7 +75,7 @@ export default function Order() {
 	const [jasa, setJasa] = React.useState('');
 	const [jasaData, setJasaData] = React.useState();
 	const [ok, setOK] = React.useState(false);
-	return (<Page maxWidth="sm" style={{ minHeight: '600px' }}>
+	return (<Page className="paper" maxWidth="sm">
 		<h1>Order</h1>
 		<Form action="user/order" redirect={(json) => history().push('/user/order/detail/'+json.id)}>
 			<Input name="order_nama" label="Nama Barang (Wajib)" value={nama} onChange={(e) => setNama(e.target.value)} />

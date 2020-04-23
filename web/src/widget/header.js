@@ -1,52 +1,89 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import Hidden from '@material-ui/core/Hidden';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+import Avatar from '@material-ui/core/Avatar';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
-import { useStyles, login, doLogout } from '../main/Helper';
+import Dashboard from '@material-ui/icons/Dashboard';
+import People from '@material-ui/icons/People';
+import ExitToApp from '@material-ui/icons/ExitToApp';
 import { Link } from 'react-router-dom';
-import { RoleTopbars } from '../main/App';
-import Box from '@material-ui/core/Box';
-import { publicUrl } from '../main/Config';
-import { Context } from '../main/Contexts';
+import { appTitle, publicUrl } from 'main/Config';
+import { Context } from 'main/Contexts';
+import { getAvatarUrl, login, doLogout } from 'main/Helper';
 
-export default function Header() {
-  const classes = useStyles();
+
+export function LoginMenu() {
+  const AvatarMenu = (props) => <Menu
+    {...props} elevation={4}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: 50,
+      horizontal: 'center',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'center',
+    }}
+  />;
+  const role = login().role;
+  const [open, setOpen] = React.useState(null);
   return (
-    <Box style={{ background: 'black', position: "sticky", top: -120, zIndex: 1250 }}>
-      <Box display="flex" height={120} paddingX={2} alignItems="center">
+    <>
+      <IconButton disableRipple size="small" onClick={(e) => setOpen(open ? null : e.currentTarget)}>
+        <Avatar alt={login().name} src={getAvatarUrl()} />
+      </IconButton>
+      <AvatarMenu anchorEl={open} open={!!open} onClose={() => setOpen(null)} >
+        <MenuItem component={Link} onClick={() => setOpen(null)} to={`/${role}`}>
+          <ListItemIcon children={<Dashboard />} />
+          <ListItemText children="Dashboard" />
+        </MenuItem>
+        <MenuItem component={Link} onClick={() => setOpen(null)} to={`/${role}/profile`}>
+          <ListItemIcon children={<People />} />
+          <ListItemText children="Profile" />
+        </MenuItem>
+        <MenuItem onClick={doLogout}>
+          <ListItemIcon children={<ExitToApp />} />
+          <ListItemText children="Logout" />
+        </MenuItem>
+      </AvatarMenu>
+    </>
+  )
+}
+
+
+export default function Header({ children }) {
+  return (
+    <div className="head-sticky">
+      <div className="head-static">
         <Hidden xsDown>
-        <img style={{height: 90}} src={publicUrl + '/assets/logo best logistic.png'} alt="Logo" />
+          <img className="head-avatar" src={publicUrl + '/assets/logo best logistic.png'} alt="Logo" />
         </Hidden>
-        <img style={{height: 60, margin: "auto"}} src={publicUrl + '/assets/header.png'} alt="Logo" />
-      </Box>
-      <AppBar position="static" className={classes.appBar}>
-        <Toolbar variant="dense">
-          <Hidden smUp implementation="css">
-            <IconButton
-              aria-label="open drawer"
-              edge="start"
-              onClick={() => Context.set('drawerOpen', true)}
-              className={classes.menuButton}
-            >
-              <MenuIcon />
-            </IconButton>
-          </Hidden>
-          <Box flexGrow={1} />
-          <Hidden xsDown implementation="css">
-            <RoleTopbars />
-          </Hidden>
-          <Box flexGrow={1} />
-          {
-            login() ? <>
-            <Button component={Link} to={"/"+login().role}>Panel</Button>
-            <Button onClick={doLogout}>Keluar</Button>
-            </> : <Button component={Link} to="/login">Masuk</Button>
-          }
+        <img style={{ maxHeight: 60, maxWidth: '90vw', margin: "auto" }} src={publicUrl + '/assets/header.png'} alt="Logo" />
+      </div>
+      <AppBar position="sticky" className="appbar-root">
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={() => Context.set('drawerOpen', !Context.get('drawerOpen'))}
+            className="appbar-menubutton"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className="appbar-title">
+            {appTitle}
+          </Typography>
+          {children}
         </Toolbar>
       </AppBar>
-    </Box >
+    </div >
   )
 }

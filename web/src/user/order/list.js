@@ -8,7 +8,7 @@ export default function () {
 		src="user/order"
 		itemKey="order_id"
 		itemLabel="Order"
-		predefinedActions={['add', 'input']}
+		predefinedActions={['add', 'detail']}
 		columns={{
 			order_nama: 'Nama Barang',
 			order_status: {

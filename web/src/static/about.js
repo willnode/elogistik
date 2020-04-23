@@ -9,7 +9,7 @@ export default function About() {
 	const Img = ({src}) => {
 		return <img alt="" style={{width: '100%'}} src={publicUrl + `/assets/about/${src}.png`} />
 	}
-	return (<Page center>
+	return (<Page className="paper center" maxWidth="md">
 		<h1>Tentang Best Logistic</h1>
 
 		<p>Kami adalah Best Logistics Surabaya, perusahaan yang bergerak dibidang jasa pengiriman barang / cargo atau ekspedisi </p>

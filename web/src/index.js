@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom';
+import { hydrate, render } from 'react-dom';
 import React from 'react';
 import { BrowserRouter } from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -32,9 +32,9 @@ function GenerateTheme() {
         contrastText: '#fff',
       },
       secondary: {
-        light: '#999999',
-        main: '#777777',
-        dark: '#555555',
+        light: '#3aff83',
+        main: '#00e651',
+        dark: '#00ac19',
         contrastText: '#fff',
       },
       type: 'dark',
@@ -55,7 +55,8 @@ function MainApp() {
   );
 }
 
-ReactDOM.render(<MainApp />, document.getElementById('root'));
+let root = document.getElementById('root');
+(root.hasChildNodes() ? hydrate : render)(<MainApp />, root);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

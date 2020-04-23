@@ -116,7 +116,7 @@ function Udara() {
 }
 
 export default function Layanan() {
-	return (<Page textAlign="justify" maxWidth="md">
+	return (<Page className="paper justify" maxWidth="md">
 		<Route path="/layanan/darat" component={Darat} />
 		<Route path="/layanan/laut" component={Laut} />
 		<Route path="/layanan/udara" component={Udara} />

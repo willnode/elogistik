@@ -31,7 +31,7 @@ const HtmlTooltip = withStyles((theme) => ({
 export default function Balloon() {
 	const [open, setOpen] = Context.bind('balloon', useState(false));
 	const ref = React.useRef();
-	return <Box position="fixed" bottom={8} right={12}>
+	return <Box zIndex="3000" position="fixed" bottom={8} right={12}>
 		<HtmlTooltip open={open} arrow interactive
 			PopperProps={{
 				disablePortal: true,
@@ -57,7 +57,7 @@ export default function Balloon() {
 				<p>
 					Anda bisa tanyakan lebih lanjut dengan menghubungi kami langsung
 				</p>
-				<ButtonGroup color="primary">
+				<ButtonGroup color="secondary">
 					<Button variant="text">
 						<Box clone marginRight={1}><WAIcon /></Box>
 					</Button>
@@ -79,7 +79,7 @@ export default function Balloon() {
 			<Fab
 				variant="extended"
 				onClick={() => setOpen(!open)}
-				color='primary'
+				color='secondary'
 			>
 				<Box clone marginRight={1}><CallIcon /></Box> Chat
 			</Fab>

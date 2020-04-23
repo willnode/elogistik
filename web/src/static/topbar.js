@@ -8,7 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Grow from '@material-ui/core/Grow';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
-export function ButtonDropdown({ label, children }) {
+export function ButtonDropdown({ label, component, children }) {
 	const [open, setOpen] = React.useState(false);
 	const anchorRef = React.useRef(null);
 
@@ -37,6 +37,7 @@ export function ButtonDropdown({ label, children }) {
 			aria-controls={open ? 'menu-list-grow' : undefined}
 			aria-haspopup="true"
 			onClick={handleToggle}
+			component={component}
 		>
 			{label}
 	 </Button>
@@ -61,10 +62,11 @@ export function ButtonDropdown({ label, children }) {
 }
 export default function Topbar({ component }) {
 	component = component || Link;
+	let Button = component;
 	return <>
 		<Button component={component} to="/">Beranda</Button>
 		<Button component={component} to="/order">Order</Button>
-		<ButtonDropdown label="Layanan">
+		<ButtonDropdown component={component} label="Layanan">
 			<MenuItem component={component} to="/layanan/darat">Layanan Darat</MenuItem>
 			<MenuItem component={component} to="/layanan/laut">Layanan Laut</MenuItem>
 			<MenuItem component={component} to="/layanan/udara">Layanan Udara</MenuItem>

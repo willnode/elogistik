@@ -24,8 +24,8 @@ export default function () {
 
 
 	return (
-		<Page noStyle={false} maxWidth="md" src={'user/order/' + id} dataCallback={setData}>
-			<h1>Masih WIP</h1>
+		<Page className="paper center" maxWidth="sm" src={'user/order/' + id} dataCallback={setData}>
+			<h1>Cek Status Order</h1>
 			{!data ? '' : (
 				<Form action={"user/order/" + id} redirect={id > 0 ? doReload : (json) => history().push('/user/order/detail/' + json.id)}>
 					<FlexGroup marginY={2} label="Status Barang">{statusDict[data.order_status]}</FlexGroup>

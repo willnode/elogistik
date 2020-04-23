@@ -1,38 +1,13 @@
 import React, { Component } from 'react';
-import { Switch, Route, withRouter } from "react-router-dom";
-import Admin, { Sidebar as AdminSidebar } from '../admin';
-import User, { Sidebar as UserSidebar } from '../user';
-import StaticRooms, { Topbar as StaticTopbar } from '../static/';
-import Layout from '../widget/layout';
+import { withRouter } from "react-router-dom";
+import { withStyles } from '@material-ui/core/styles';
 import { Context, TemporaryContext } from './Contexts';
-import { popMessages, login } from './Helper';
+import { popMessages } from './Helper';
 import { appKey } from './Config';
-
-
-const RoleRooms = (props) => (
-  <Switch>
-    <Route path="/admin" component={Admin} />
-    <Route path="/user" component={User} />
-    <Route {...props} />
-  </Switch>
-)
-
-const RoleSidebars = (props) => (
-  <Switch>
-    <Route path="/admin" component={login() && AdminSidebar} />
-    <Route path="/user" component={login() && UserSidebar} />
-    <Route {...props} />
-  </Switch>
-)
-
-const RoleTopbars = ({component}) => (
-  <StaticTopbar component={component}/>
-  // <Switch>
-  //   <Route path="/admin" component={login() && AdminTopbar} />
-  //   <Route path="/user" component={login() && UserTopbar} />
-  //   <Route children={} />
-  // </Switch>
-)
+import Admin from '../admin';
+import User from '../user';
+import Static from '../static';
+import Layout from 'widget/layout';
 
 class App extends Component {
   state = {
@@ -44,6 +19,7 @@ class App extends Component {
   componentDidMount() {
     TemporaryContext.history = this.props.history;
     this.props.history.listen(() => {
+      document.getElementById("main").scrollIntoView({behavior: "smooth"});
       popMessages();
     }); // Think we don't need unmount, eh?
   }
@@ -51,20 +27,32 @@ class App extends Component {
     return [this.state[key], (v) => this.setState(() => ({ [key]: v }))]
   }
   render() {
+    document.body.className = this.props.classes.root;
+    TemporaryContext.roles = [Admin, User, Static];
     Context.bind('fetching', this.generateBinding('fetching'));
     Context.bind('auth', this.generateBinding('auth'));
     Context.bind('login', this.generateBinding('login'));
     Context.bind('counter', this.generateBinding('counter'));
     return (
-      <Layout>
-        <RoleRooms key={this.state.counter} component={StaticRooms} />
-      </Layout>
+      <Layout
+        key={this.state.counter}
+        roles={TemporaryContext.roles}
+      />
     );
   }
 }
 
-export default withRouter(App);
-
-export {
-  RoleSidebars, RoleTopbars, RoleRooms
-}
+export default withRouter(withStyles((theme) => ({
+  root: {
+    // These props provides a global CSS variable to applied theme.
+    // You can use these CSS vars on project root style.css
+    // Add more to variables that you need.
+    '--background': theme.palette.background.default,
+    '--paper': theme.palette.background.paper,
+    '--primary': theme.palette.primary.main,
+    '--secondary': theme.palette.secondary.main,
+    '--z-index-appbar': (theme.zIndex.drawer + 1),
+    '--drawer-width': '240px',
+    '--layout-left-padding': 0,
+  }, // a style rule
+}))(App));

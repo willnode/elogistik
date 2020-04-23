@@ -1,4 +1,6 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import {InnerForm as ForgotPage } from './forgot';
 import Typography from '@material-ui/core/Typography';
 import {  history, extractForm, doLogin, setError, login, setMessage } from '../main/Helper';
 import Page, { SEO } from '../widget/page';
@@ -63,15 +65,19 @@ function LoginPage({ callback }) {
 }
 
 export default function Login({ callback }) {
-  const [has, setHas] = useState(true);
+  const [state, setState] = useState(0);
   return (
-    <Page maxWidth="sm" center>
+    <Page maxWidth="sm" className="paper center">
       <Typography component="h1" variant="h5">
-        {has ? "Masuk" : "Daftar"}
+        {["Masuk", "Daftar", "Pulihkan Akun"][state]}
       </Typography>
 
-      <Checkbox label="Sudah punya akun?" checked={has} onChange={(e) => setHas(e.target.checked)} />
-      {has ? <LoginPage callback={callback} /> : <RegisterPage callback={callback} />}
+      {state === 0 && <LoginPage callback={callback} /> }
+      {state === 1 && <RegisterPage callback={callback} /> }
+      {state === 2 && <ForgotPage callback={callback} /> }
+      {state !== 0 && <Button onClick={() => setState(0)}>Sudah punya akun?</Button>}
+      {state !== 1 && <Button onClick={() => setState(1)}>Belum punya akun?</Button>}
+      {state !== 2 && <Button onClick={() => setState(2)}>Lupa password?</Button>}
     </Page>
   );
 }

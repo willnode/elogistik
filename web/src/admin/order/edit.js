@@ -16,7 +16,7 @@ export default function () {
 	const data = (d && d.data);
 
 	return (
-		<Page maxWidth="sm" noStyle={false} src={'admin/order/' + id} dataCallback={setData}>
+		<Page maxWidth="sm" className="paper" src={'admin/order/' + id} dataCallback={setData}>
 			<h1>WIP</h1>
 			{!data ? '' : (
 				<Form action={"admin/order/" + id} redirect={id > 0 ? doReload : (json) => history().push('/admin/order/edit/'+json.id)}>
