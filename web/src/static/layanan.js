@@ -36,6 +36,15 @@ function Darat() {
 function Laut() {
 	return <>
 		<h1>Jalur Pengiriman Laut</h1>
+		<div className="gallery-slider gallery"><Slider infinite autoplay dots={true}>
+			{
+				[1, 2, 3, 4, 5].map((i) =>
+
+					<img key={i} src={`${publicUrl}/assets/laut/${i + 1}.jpeg`} alt="" />
+
+				)
+			}
+		</Slider></div>
 		<p>layanan pengiriman kargo dan barang berbasis ekspedisi murah terbaik melalui jalur laut menggunakan berbagai jenis kapal, mulai dari kapal Pelni, kapal Roro &amp; kapal lainnya.</p>
 		<p>Anda dapat melihat hasil kerja kami di <Link to="/galeri">gallery</Link>minat menggunakan dengan jasa kami ? silahkan klik <Link to="/order">order</Link>atau jika anda ingin bertanya-tanya, silahkan hubungi salah satu <a href="#/" onClick={() => Context.set('balloon', true)}>admin</a> kami.</p>
 	</>
@@ -44,6 +53,16 @@ function Laut() {
 function Udara() {
 	return <>
 		<h1>Jalur Pengiriman Udara</h1>
+
+		<div className="gallery-slider gallery"><Slider infinite autoplay dots={true}>
+			{
+				[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) =>
+
+					<img key={i} src={`${publicUrl}/assets/udara/${i + 1}.jpeg`} alt="" />
+
+				)
+			}
+		</Slider></div>
 
 		<h3>Pengerian / Definisi Cargo</h3>
 

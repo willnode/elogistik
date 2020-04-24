@@ -14,6 +14,7 @@ import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import BusinessIcon from '@material-ui/icons/Business';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import InfoIcon from '@material-ui/icons/Info';
+import PeopleIcon from '@material-ui/icons/People';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import YouTubeIcon from '@material-ui/icons/YouTube';
@@ -33,6 +34,7 @@ export default function Footer() {
 						<DrawerListItem to="/company/" icon={BusinessIcon} label="Company" />
 						<DrawerListItem to="/galeri/" icon={PhotoLibraryIcon} label="Gallery" />
 						<DrawerListItem to="/about/" icon={InfoIcon} label="About Us" />
+						<DrawerListItem to="/login/" icon={PeopleIcon} label="Member Area" />
 					</List>
 				</Page>
 			</Grid>

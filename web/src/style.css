@@ -13,7 +13,7 @@ body {
 
 .head-sticky {
     background: black;
-    position: sticky;
+    /* position: sticky; */
     top: -120px;
     z-index: 1250;
 }
@@ -92,12 +92,45 @@ body {
     margin: 2em 0;
 }
 
+.paper.background {
+    background-color: var(--paper);
+}
+
 .paper.justify {
     text-align: justify;
 }
 
 .paper.table {
     padding: 0;
+}
+
+.ceo {
+    width: 500px;
+    max-width: 100%;
+    margin: 1em 0;
+}
+
+.holdout {
+    height: 100vw;
+    max-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.holdout:before {
+    content: "";
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    background: var(--bg) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .paper.center,
@@ -188,6 +221,17 @@ a {
 .marquee .separator {
     display: inline-block;
     width: 200px;
+}
+
+.cargo {
+    width: 100%;
+    margin: 3em 0;
+}
+
+.cargo svg {
+    height: 100px;
+    width: 100px;
+    margin: 1em;
 }
 
 @keyframes marquee {

@@ -8,6 +8,7 @@ import { publicUrl } from './main/Config';
 import App from './main/App';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import 'bootstrap/dist/css/bootstrap-grid.css';
 import './style.css';
 
 function GenerateTheme() {

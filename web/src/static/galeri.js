@@ -9,7 +9,9 @@ export default function Galeri() {
 		<h1>Galeri Best Logistics</h1>
 		<div className="gallery-slider gallery"><Slider infinite autoplay dots={true}>
 			{
-				[2, 1, 2, 1, 1, 2, 1, 2].map((x, i) =>
+				[
+					1, 2, 3, 4, 5, 6, 7, 8
+				].map((x, i) =>
 					<img key={i} src={`${publicUrl}/assets/gallery/${i + 1}.jpg`} alt="" />
 				)
 			}
@@ -18,10 +20,10 @@ export default function Galeri() {
 		<div className="gallery-slider gallery"><Slider infinite autoplay dots={true}>
 			{
 				[
-					1, 2, 3, 3, 1, 1, 1, 1, 1, 1,
-					1, 2, 1, 2, 1, 1, 1, 1, 2, 1,
-					1, 1, 1, 2, 3
-				].map((x, i) =>
+					1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+					11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+					21, 22, 23,
+				].map((i) =>
 
 					<img key={i} src={`${publicUrl}/assets/kegiatan/${i + 1}.jpeg`} alt="" />
 
@@ -31,27 +33,40 @@ export default function Galeri() {
 		<h2>Galeri Armada Best Logistics</h2>
 		<div className="gallery-slider gallery"><Slider infinite autoplay dots={true}>
 			{
-				[1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1].map((x, i) =>
+				[
+					1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+					11, 12, 13, 14
+				].map((i) =>
 
 					<img key={i} src={`${publicUrl}/assets/armada/${i + 1}.jpeg`} alt="" />
 
 				)
 			}
 		</Slider></div>
-		<h2>Galeri Cargo Best Logistics</h2>
+		<h2>Galeri Cargo Darat Best Logistics</h2>
 		<div className="gallery-slider gallery"><Slider infinite autoplay dots={true}>
 			{
-				[2, 1, 2, 1, 1, 2, 1, 2].map((x, i) =>
+				[1, 2, 3, 4, 5, 6, 7, 8].map((i) =>
 
 					<img key={i} src={`${publicUrl}/assets/cargo/${i + 1}.jpeg`} alt="" />
 
 				)
 			}
 		</Slider></div>
-		<h2>Galeri Udara Best Logistics</h2>
+		<h2>Galeri Cargo Laut Best Logistics</h2>
 		<div className="gallery-slider gallery"><Slider infinite autoplay dots={true}>
 			{
-				[1, 2, 1, 1, 1, 2, 1, 2, 1].map((x, i) =>
+				[1, 2, 3, 4, 5].map((i) =>
+
+					<img key={i} src={`${publicUrl}/assets/laut/${i + 1}.jpeg`} alt="" />
+
+				)
+			}
+		</Slider></div>
+		<h2>Galeri Cargo Udara Best Logistics</h2>
+		<div className="gallery-slider gallery"><Slider infinite autoplay dots={true}>
+			{
+				[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) =>
 
 					<img key={i} src={`${publicUrl}/assets/udara/${i + 1}.jpeg`} alt="" />
 

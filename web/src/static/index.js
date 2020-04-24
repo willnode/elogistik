@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
+import Hidden from '@material-ui/core/Hidden';
 import HomeIcon from '@material-ui/icons/Home';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
@@ -18,6 +19,7 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import { Link, Switch, Route, Redirect } from "react-router-dom";
 import { DrawerComponent, DrawerListItem } from 'widget/drawer';
+import PeopleIcon from '@material-ui/icons/People';
 import Home from './home';
 import Login from './login';
 import Forgot from './forgot';
@@ -64,6 +66,7 @@ function LeftBar() {
         <DrawerListItem to="/company/" icon={BusinessIcon} label="Company" />
         <DrawerListItem to="/galeri/" icon={PhotoLibraryIcon} label="Gallery" />
         <DrawerListItem to="/about/" icon={InfoIcon} label="About Us" />
+        <DrawerListItem to="/login/" icon={PeopleIcon} label="Member Area" />
       </List>
       <List>
         <ListItem>
@@ -99,7 +102,9 @@ function LeftBar() {
 
 function TopBar() {
   return <>
+  <Hidden xsDown implementation="css">
     <Button component={Link} to="/login/" color="inherit">Masuk</Button>
+    </Hidden>
   </>
 }
 
