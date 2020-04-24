@@ -108,30 +108,6 @@ export default function Home() {
         {
           [
             1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-            11, 12, 13, 14
-          ].map((i) =>
-
-            <img key={i} src={`${publicUrl}/assets/armada/${i + 1}.jpeg`} alt="" />
-
-          )
-        }
-      </Slider></div>
-      <Typography variant="h4">
-        Driver kami mengedepankan keselamatan kerja dan mengikuti regulasi angkutan darat dan management resiko.
-      </Typography>
-      <p><Fab
-        variant="extended"
-        component={Link} to="/gallery/"
-        color='primary'
-      >
-        <PhotoLibraryIcon className="mr-2" /> Gallery Collection
-			</Fab></p>
-    </div>
-    <div className="paper background center">
-      <div className="gallery-slider gallery"><Slider infinite autoplay dots={true}>
-        {
-          [
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
             11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
             21, 22, 23,
           ].map((i) =>
