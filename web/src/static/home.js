@@ -90,9 +90,9 @@ export default function Home() {
 			</Fab></p>
     </div>
     <div className="paper background center">
-      <img className="ceo" src="/assets/ceo.jpg" alt="" />
+      <img className="ceo" src="/assets/ceo.png" alt="" />
       <Typography variant="h4">
-        "Keep Strong, Be Humble, And Wise"
+        "Kami Muda Pekerja Keras Bukan Pemalas"
       </Typography>
       <p><Fab
         variant="extended"
