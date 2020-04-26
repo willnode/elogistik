@@ -92,11 +92,11 @@ export default function Home() {
     <div className="paper background center">
       <img className="ceo" src="/assets/ceo.jpg" alt="" />
       <Typography variant="h4">
-        "Saatnya yang muda yang berkarya"
+        "Keep Strong, Be Humble, And Wise"
       </Typography>
       <p><Fab
         variant="extended"
-        component={Link} to="/order/"
+        component={Link} to="/company/"
         color='primary'
       >
         <BusinessIcon className="mr-2" /> Company Profile

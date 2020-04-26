@@ -8,7 +8,7 @@ class LoginModel
 	// Database variables
 	const TABLE = 'login';
 	const TABLEKEY = 'login_id';
-	const USERNAMES = [ 'username', 'email' ];
+	const USERNAMES = [ 'username', 'email', 'hp' ];
 	const TABLEPW = 'password';
 	const TABLEOTP = 'otp';
 
