@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Header from './header';
 import Footer from './footer';
 import Alert from '@material-ui/lab/Alert';
-import Toolbar from '@material-ui/core/Toolbar';
 import { Context } from 'main/Contexts';
 import { Switch, Route } from 'react-router-dom';
 import Balloon from './balloon';

@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import {InnerForm as ForgotPage } from './forgot';
 import Typography from '@material-ui/core/Typography';
-import {  history, extractForm, doLogin, setError, login, setMessage, getQueryParam } from '../main/Helper';
+import {  extractForm, doLogin, setError, setMessage } from '../main/Helper';
 import Page, { SEO } from '../widget/page';
 import { Input, Form, Submit, Checkbox, controlPost } from '../widget/controls';
 import { useState } from 'react';
