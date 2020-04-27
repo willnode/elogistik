@@ -234,6 +234,54 @@ a {
     margin: 1em;
 }
 
+.cs-item {
+    margin: 1em 0.5em;
+}
+.cs-avatar {
+    border-radius: 300px;
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+    border: 10px solid var(--primary);
+}
+
+.cs-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--primary);
+}
+.cs-title {
+    color: white;
+    background: var(--secondary);
+    border-radius: 300px;
+    padding: 0.5em 1em;
+    margin-bottom: 2em;
+}
+.cs-float {
+    z-index: 3000;
+    position: fixed;
+    bottom: 8px;
+    right: 12px;
+}
+
+
+.cs-float > div {
+    right: 0;
+    bottom: 60px;
+    top: inherit !important;
+    left: inherit !important;
+}
+.cs-container {
+    width: 95vw;
+    max-width: 600px;
+    background: #111;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 2em;
+}
+
 @keyframes marquee {
     0% {
         transform: translate(0, 0);
