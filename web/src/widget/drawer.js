@@ -5,7 +5,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Context } from 'main/Contexts';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
 
 
 const DrawerListItem = ({ to, icon, label }) => (

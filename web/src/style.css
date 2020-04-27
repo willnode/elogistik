@@ -13,7 +13,7 @@ body {
 
 .head-sticky {
     background: black;
-    /* position: sticky; */
+    position: sticky;
     top: -120px;
     z-index: 1250;
 }

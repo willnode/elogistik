@@ -3,16 +3,10 @@ import React, { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
 import Fab from '@material-ui/core/Fab';
-import IconButton from '@material-ui/core/IconButton';
 import CallIcon from '@material-ui/icons/Call';
-import SendIcon from '@material-ui/icons/Send';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import { publicUrl } from '../main/Config';
 import { Context } from '../main/Contexts';
 import { Popper } from '@material-ui/core';
 

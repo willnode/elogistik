@@ -4,13 +4,11 @@ import Slider from "react-slick";
 import { publicUrl } from '../main/Config';
 
 export default function Company() {
-	
+
 	return (<Page className="paper center" maxWidth="md">
 		<SEO
       title="Company Profile Best Logistic Surabaya!"
-      description="Company profile kami dapat memberikan anda informasi tentang Best Logistic Surabaya,
-	  mulai dari didirikannya Best Logistic Surabaya, legalitas, dan beberapa dokumentasi
-	  tentang apa yang kami lakukan."
+      description="Company profile kami dapat memberikan anda informasi tentang Best Logistic Surabaya, mulai dari didirikannya Best Logistic Surabaya, legalitas, dan beberapa dokumentasi tentang apa yang kami lakukan."
       image="/assets/beranda/36.jpg"
     />
 		<h1>Company Profile</h1>

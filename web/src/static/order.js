@@ -26,10 +26,10 @@ function RealOrder({ id, ok, setOk }) {
 	}, [data, qty, berat]);
 	useEffect(() => {
     const limit = data ? data.retail_minkg : 100;
-		if (ok !== Boolean(berat >= limit)) {
-			setOk(Boolean(berat >= limit));
+		if (ok !== Boolean(berat * qty >= limit)) {
+			setOk(Boolean(berat * qty >= limit));
 		}
-	}, [ok, berat, setOk, data])
+	}, [ok, berat, setOk, qty, data])
 	return <Page src={`check_retail/${id}`} dataCallback={(x) => setData(x.data)}>
 		{data && <div>
 			<input type="hidden" readOnly name="order_retail" value={id} />
@@ -54,7 +54,7 @@ function RealOrder({ id, ok, setOk }) {
 				{formatRupiah(harga)}
 			</FlexGroup>
 
-			{!ok && <Alert style={{ margin: '1rem 0' }} severity="info">{'Hitungan harga per KG dihitung mulai '+data.retail_minkg+' KG'}</Alert>}
+			{!ok && <Alert style={{ margin: '1rem 0' }} severity="info">{'Hitungan KG saat ini '+(berat*qty)+'  KG akan disetarakan menjadi '+data.retail_minkg+' KG'}</Alert>}
 			<Alert style={{ margin: '1rem 0' }} severity={login() ? "info" : "warning"}>{login() ? 'Data order anda akan dimasukkan ke akun anda' : 'Anda perlu masuk untuk melanjutkan'}</Alert>
 		</div>}
 	</Page>

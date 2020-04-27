@@ -6,13 +6,13 @@ import Slider from "react-slick";
 import { publicUrl } from '../main/Config';
 
 function Darat() {
-	
+
 	return <>
 		<SEO
-      title="Layanan Best Logistic Surabaya"
-      description="Best Logistics Surabaya memiliki beberapa layanan untuk pengiriman barang anda."
-      image="/assets/beranda/36.jpg"
-    />
+			title="Layanan Best Logistic Surabaya"
+			description="Best Logistics Surabaya memiliki beberapa layanan untuk pengiriman barang anda."
+			image="/assets/beranda/36.jpg"
+		/>
 		<h1>Jalur Pengiriman Darat</h1>
 		<div className="gallery-slider compact">
 			<Slider infinite>
@@ -41,6 +41,11 @@ function Darat() {
 
 function Laut() {
 	return <>
+		<SEO
+			title="Layanan Best Logistic Surabaya"
+			description="Best Logistics Surabaya memiliki beberapa layanan untuk pengiriman barang anda."
+			image="/assets/beranda/36.jpg"
+		/>
 		<h1>Jalur Pengiriman Laut</h1>
 		<div className="gallery-slider gallery"><Slider infinite autoplay dots={true}>
 			{
@@ -58,6 +63,11 @@ function Laut() {
 
 function Udara() {
 	return <>
+		<SEO
+			title="Layanan Best Logistic Surabaya"
+			description="Best Logistics Surabaya memiliki beberapa layanan untuk pengiriman barang anda."
+			image="/assets/beranda/36.jpg"
+		/>
 		<h1>Jalur Pengiriman Udara</h1>
 
 		<div className="gallery-slider gallery"><Slider infinite autoplay dots={true}>

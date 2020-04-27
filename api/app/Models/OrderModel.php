@@ -95,7 +95,7 @@ class OrderModel extends BaseModel
 		extract($event, EXTR_REFS);
 
 		if ($method !== DELETE) {
-			$this->sendEmail($id[0]);
+			$this->sendEmail(is_array($id) ? $id[0] : $id);
 		}
 	}
 
