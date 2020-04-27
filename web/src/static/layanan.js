@@ -6,7 +6,13 @@ import Slider from "react-slick";
 import { publicUrl } from '../main/Config';
 
 function Darat() {
+	
 	return <>
+		<SEO
+      title="Layanan Best Logistic Surabaya"
+      description="Best Logistics Surabaya memiliki beberapa layanan untuk pengiriman barang anda."
+      image="/assets/beranda/36.jpg"
+    />
 		<h1>Jalur Pengiriman Darat</h1>
 		<div className="gallery-slider compact">
 			<Slider infinite>

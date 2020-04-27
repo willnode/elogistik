@@ -4,9 +4,13 @@ import { publicUrl } from '../main/Config';
 import Slider from "react-slick";
 
 export default function Galeri() {
-
+	
 	return (<Page className="paper center">
-		<h1>Galeri Best Logistics</h1>
+		<SEO
+      title="Gallery Best Logistic Surabaya"
+      description="Anda dapat melihat hasil dokumentasi dari Best Logistic Surabaya, mulai dari Kegiatan hingga apa saja yang telah kami kerjakan."
+      image="/assets/beranda/36.jpg"
+    /><h1>Galeri Best Logistics</h1>
 		<div className="gallery-slider gallery"><Slider infinite autoplay dots={true}>
 			{
 				[

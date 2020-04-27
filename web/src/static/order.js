@@ -79,7 +79,11 @@ export default function Order() {
 	const [jasaData, setJasaData] = React.useState();
 	const [ok, setOK] = React.useState(null);
 	return (<Page className="paper" maxWidth="sm">
-		<h1>Order</h1>
+		<SEO
+      title="Welcome to Best Logistic Surabaya!"
+      description="Best Logistics Surabaya adalah perusahaan yang bergerak dibidang jasa pengiriman barang / cargo atau ekspedisi yang didukung oleh tenaga kerja / SDM yang profesional dan cakap serta memiliki armada yang sehat dengan perawatan rutin."
+      image="/assets/beranda/36.jpg"
+    /><h1>Order</h1>
 		<Form action="user/order" redirect={(json) => history().push('/user/order/detail/' + json.id)}>
 			<Input name="order_nama" label="Nama Barang (Wajib)" value={nama} onChange={(e) => setNama(e.target.value)} />
 			<Select label="Pengiriman Asal" options={{

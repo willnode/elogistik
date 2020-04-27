@@ -22,7 +22,7 @@ export default function Home() {
     <SEO
       title="Welcome to Best Logistic Surabaya!"
       description="Best Logistics Surabaya adalah perusahaan yang bergerak dibidang jasa pengiriman barang / cargo atau ekspedisi yang didukung oleh tenaga kerja / SDM yang profesional dan cakap serta memiliki armada yang sehat dengan perawatan rutin."
-      image="/assets/gallery/1.jpg"
+      image="/assets/beranda/36.jpg"
     />
     <div className="paper background center">
 

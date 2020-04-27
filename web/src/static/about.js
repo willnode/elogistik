@@ -7,13 +7,18 @@ import { Context } from 'main/Contexts';
 
 
 export default function About() {
+	
 	const Img = ({src}) => {
 		return <img alt="" style={{width: '100%'}} src={publicUrl + `/assets/about/${src}.png`} />
 	}
 	return (<Page className="paper center" maxWidth="md">
-		<h1>Tentang Best Logistic</h1>
+		<SEO
+      title="About Best Logistic Surabaya"
+      description="Best Logistics Surabaya adalah perusahaan yang bergerak dibidang jasa pengiriman barang / cargo atau ekspedisi."
+      image="/assets/beranda/36.jpg"
+    /><h1>Tentang Best Logistic</h1>
 
-		<p>Kami adalah Best Logistics Surabaya, perusahaan yang bergerak dibidang jasa pengiriman barang / cargo atau ekspedisi </p>
+		<p>Best Logistics Surabaya adalah perusahaan yang bergerak dibidang jasa pengiriman barang / cargo atau ekspedisi </p>
 		<h2>Crew</h2>
 		<Grid container justify="center" spacing={2}>
 			<Grid item md={6} lg={4} xl={2}><Img src={1} /></Grid>
