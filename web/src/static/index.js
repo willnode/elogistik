@@ -25,7 +25,7 @@ import Login from './login';
 import Forgot from './forgot';
 import Offline from './offline';
 import Page404 from './404';
-import { login } from 'main/Helper';
+import { login, getQueryParam } from 'main/Helper';
 import Order from './order';
 import Layanan from './layanan';
 import Galeri from './galeri';
@@ -33,7 +33,7 @@ import About from './about';
 import Company from './company';
 
 function RedirectIfLoggedInOrShow({ component }) {
-  return login() ? <Redirect to={'/' + login().role + '/'} /> : React.createElement(component);
+  return login() ? <Redirect to={getQueryParam('redirect') || '/' + login().role + '/'} /> : React.createElement(component);
 }
 
 function Main() {

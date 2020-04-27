@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import {InnerForm as ForgotPage } from './forgot';
 import Typography from '@material-ui/core/Typography';
-import {  history, extractForm, doLogin, setError, login, setMessage } from '../main/Helper';
+import {  history, extractForm, doLogin, setError, login, setMessage, getQueryParam } from '../main/Helper';
 import Page, { SEO } from '../widget/page';
 import { Input, Form, Submit, Checkbox, controlPost } from '../widget/controls';
 import { useState } from 'react';
@@ -19,7 +19,7 @@ async function form_register(e, callback) {
         data.get('email'),
         data.get('password'),
         data.get('rememberme'))
-        .then(() => callback ? callback() : [setMessage('Berhasil terdaftar'), history().push('/'+login().role)])
+        .then(() => callback ? callback() : [setMessage('Berhasil terdaftar')])
         .catch(() => setError('Login salah')));
     })(e)
   )
@@ -51,7 +51,7 @@ async function form_login(e, callback) {
 		data.get('username'),
 		data.get('password'),
     data.get('rememberme'))
-    .then(() => callback ? callback() : [setMessage('Selamat datang'), history().push('/'+login().role)])
+    .then(() => callback ? callback() : [setMessage('Selamat datang')])
     .catch(() => setError('Login salah')));
 }
 

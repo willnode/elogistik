@@ -8,7 +8,7 @@ import { appKey } from '../main/Config';
 import {
   useValidator, required, minLength, validEmail,
   matchesValue, matchesField, requireField,
-  checkAllValidators, matchesRegex
+  checkAllValidators, matchesRegex, validTel
 } from '../widget/validators';
 import Box from '@material-ui/core/Box';
 
@@ -26,6 +26,7 @@ export default function () {
   const form = data && data.data;
   const validators = {
     name: useValidator(required(), minLength(3), matchesRegex(/^[\w -'"]+$/)),
+    hp: useValidator(required(), validTel()),
     email: useValidator(required(), validEmail()),
     oldpass: useValidator(matchesValue(curPassword)),
     password: useValidator(requireField('oldpass'), minLength(8)),
@@ -39,6 +40,7 @@ export default function () {
           <Form action={`${role}/profile`} redirect={submit}>
             <Input validator={validators.name} name="name" label="Name" defaultValue={form.name} required />
             <Input validator={validators.email} name="email" label="Email" defaultValue={form.email} required type="email" />
+            <Input validator={validators.hp} name="hp" label="No HP" defaultValue={form.hp} required />
             <File folder="avatar" name="avatar" label="Avatar" defaultValue={form.avatar} accept="image/*"/>
             <Box marginTop={5}>If you need to change your password, enter the new password:</Box>
             <Input validator={validators.oldpass} name="oldpass" label="Current Password" type="password" autoComplete="current-password" />

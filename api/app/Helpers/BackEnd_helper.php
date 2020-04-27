@@ -168,6 +168,7 @@ function load_405($msg = 'Method is not Available') {
 
 /**
  * Return JSON of PHP data
+ * @return \CodeIgniter\HTTP\Response
  */
 function load_json($data) {
 	$request = Services::request();

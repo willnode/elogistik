@@ -8,6 +8,7 @@ import { Switch, Route } from 'react-router-dom';
 import Balloon from './balloon';
 import Slider from "react-slick";
 import { publicUrl } from 'main/Config';
+import { login } from 'main/Helper';
 
 function Notification() {
   Context.bind('message', useState(null));
@@ -51,11 +52,10 @@ export default function Layout({ roles }) {
   return (
     <div className="layout-root">
       <Header children={<RouteByRole component="top" roles={roles} />} />
-      <Gallery />
+      {(!login() || login().role !== 'admin') && <Gallery />}
       <div className="layout-side">
         <RouteByRole component="left" roles={roles} />
         <main className="layout-content" id="main">
-          <Toolbar />
           <Notification />
           <RouteByRole component="main" roles={roles} />
         </main>

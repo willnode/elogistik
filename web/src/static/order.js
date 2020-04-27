@@ -22,8 +22,8 @@ function RealOrder({ id, ok, setOk }) {
 		return [Math.max(kg, Math.ceil(volume / patokan)), Math.ceil(volume / 1_000_000)];
 	}, [data, kg, p, l, t])
 	const harga = useMemo(() => {
-		return data ? (berat * parseInt(data.retail_perkg) + volume * parseInt(data.retail_kubikasi)) * qty : 0;
-	}, [data, qty, berat, volume]);
+		return data ? (Math.max(100, berat) * parseInt(data.retail_perkg) * qty) : 0;
+	}, [data, qty, berat]);
 	useEffect(() => {
 		if (ok !== Boolean(berat >= 100)) {
 			setOk(Boolean(berat >= 100));
@@ -53,8 +53,8 @@ function RealOrder({ id, ok, setOk }) {
 				{formatRupiah(harga)}
 			</FlexGroup>
 
-			<Alert style={{margin: '1rem 0'}} severity={ok ? "info" : "warning"}>{!ok ? 'Minimal order adalah 100 KG' : 'Harga belum termasuk packing dan asuransi'}</Alert>
-			{ok && <Alert style={{margin: '1rem 0'}} severity={login() ? "info" : "warning"}>{login() ? 'Data order anda akan dimasukkan ke akun anda' : 'Anda perlu masuk untuk melanjutkan'}</Alert>}
+			{!ok && <Alert style={{margin: '1rem 0'}} severity="info">{'Hitungan harga per KG dihitung mulai 100 KG'}</Alert>}
+			<Alert style={{margin: '1rem 0'}} severity={login() ? "info" : "warning"}>{login() ? 'Data order anda akan dimasukkan ke akun anda' : 'Anda perlu masuk untuk melanjutkan'}</Alert>
 		</div>}
 	</Page>
 }
@@ -113,8 +113,8 @@ export default function Order() {
 					</Page>}
 				</>}
 			</Page>}
-			{login() && <Submit label="Order" disabled={!ok} />}
+			{login() && <Submit label="Order" />}
 		</Form>
-		{ok && (!login() && <Login callback={() => setOK(ok)}/>)}
+		{(!login() && <Login callback={() => setOK(ok)}/>)}
 	</Page>)
 }

@@ -11,11 +11,9 @@ export default function () {
   return <Page className="paper center">
     <img className="avatar dashboard" src={getAvatarUrl(login().avatar)} alt="Avatar" />
     <Typography variant="h4" gutterBottom>Selamat Datang, {login().name}</Typography>
-    <p>
-      <ButtonGroup variant="contained" color="primary">
-        <Button component={Link} to="/admin/profile/">Profile</Button>
-        <Button component={Link} to="/admin/order/">Cek Order</Button>
-      </ButtonGroup>
-    </p>
+    <ButtonGroup variant="contained" color="primary">
+      <Button component={Link} to="/admin/profile/">Profile</Button>
+      <Button component={Link} to="/admin/order/">Cek Order</Button>
+    </ButtonGroup>
   </Page>
 }

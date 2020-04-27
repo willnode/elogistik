@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Button from '@material-ui/core/Button';
@@ -64,7 +64,8 @@ function controlPost(url, redirect) {
 
 
 function CheckRole({ role, children }) {
-  return !login() || login().role !== role ? <Redirect to="/login" /> : children;
+  const path = useHistory().location.pathname;
+  return !login() || login().role !== role ? <Redirect to={'/login?redirect='+encodeURIComponent(path)} /> : children;
 }
 
 

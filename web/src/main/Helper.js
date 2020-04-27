@@ -143,6 +143,16 @@ const popMessages = () => {
 	setMessage(null);
 }
 
+const getQueryParam = (param) => {
+	const urlParams = new URLSearchParams(history().location.search);
+	console.log(window.location.search)
+	console.log(history().location.search)
+	console.log(history())
+	console.log(param)
+	console.log(urlParams.get(param))
+	return urlParams.get(param);
+}
+
 const formatRupiah = ((formatter) => (rp) => formatter.format(rp))(new Intl.NumberFormat('id-ID', {
 	style: 'currency',
 	currency: 'IDR',
@@ -157,6 +167,6 @@ export {
 	serverDelete, prefixRole,
 	setError, setMessage,
 	history, login, doLogin,
-	doLogout, doReload,
+	doLogout, doReload, getQueryParam,
 	popMessages, formatRupiah
 };

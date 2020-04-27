@@ -7,25 +7,28 @@ class OrderModel extends BaseModel
 {
 	protected $table = 'order';
 	protected $primaryKey = 'order_id';
+	protected $indexable = [ 'order_status' ];
 	protected $select = [
 		'order_id', 'order_retail',
 		'order_login', 'order_nama',
 		'order_berat', 'order_kg', 'order_p',
 		'order_l', 'order_t',
 		'order_kind', 'order_price',
-		'order_payment', 'order_status',
+		'order_payment', 'order_status', 'order_qty'
 	];
 	protected $allowedFields = [
 		'order_retail', 'order_nama',
 		'order_kg', 'order_p',
 		'order_l', 'order_t',
-		'order_kind', 'order_payment', 'order_qty'
+		'order_kind', 'order_payment', 'order_qty',
 	];
 	protected $fileUploadRules = [
 		'order_payment' => ['types' => ['jpg', 'jpeg', 'png', 'bmp'], 'folder'=>'payment']
 	];
 	protected $validationRules = [];
 	private $login;
+
+	// 'order','bayar','tunggu','angkut','kirim','sampai','diterima'
 
 	protected function executeBeforeExecute($event)
 	{
@@ -64,17 +67,20 @@ class OrderModel extends BaseModel
 		if ($method !== DELETE) {
 			if ($this->login->data->role === 'user') {
 				$data['order_login'] = $this->login->current_id;
+				if ($method === UPDATE && $data['order_payment']) {
+					$data['order_status'] = 'bayar';
+				}
 			}
-			if (isset($data['order_retail'])) {
+			if ($method === CREATE && isset($data['order_retail'])) {
 				$retail = Database::connect()->table('retail')->where('retail_id', $data['order_retail'])->get()->getRow();
 				if ($retail) {
-					$volume = ($data['order_p'] ?? 0) *( $data['order_l'] ?? 0) * ($data['order_t'] ?? 0);
-					$berat = max($data['order_kg'] ?? 0, $volume / ($retail->retail_jalur === 'Udara' ? 6000 : 4000));
-					$volume = $volume * ($retail->retail_kubikasi / 100000.0);
-					if ($berat < 100) {
+					$qty = $data['order_qty'];
+					if ($qty < 1) {
 						throw new ValidationException("Too skinny");
 					}
-					$harga = ($berat * $retail->retail_perkg + $retail->retail_kubikasi) * $data['order_qty'];
+					$volume = ($data['order_p'] ?? 0) *( $data['order_l'] ?? 0) * ($data['order_t'] ?? 0);
+					$berat = max($data['order_kg'] ?? 0, $volume / ($retail->retail_jalur === 'Udara' ? 6000 : 4000));
+					$harga = (max(100 / $qty, $berat) * $retail->retail_perkg) * $qty;
 					$data['order_berat'] = $berat;
 					$data['order_price'] = $harga;
 				} else {
@@ -84,4 +90,48 @@ class OrderModel extends BaseModel
 		}
 		return $event;
 	}
+	protected function executeAfterChange($event)
+	{
+		extract($event, EXTR_REFS);
+
+		if ($method !== DELETE) {
+			$this->sendEmail($id[0]);
+		}
+	}
+
+	protected function sendEmail($id)
+	{
+		$order = get_values_at('order', ['order_id' => $id]);
+		$retail = get_values_at('retail', ['retail_id' => $order->order_retail]);
+		$login = get_values_at('login', ['login_id' => $order->order_login]);
+		$email = \Config\Services::email();
+
+		$email->setFrom('noreply@bestlogisticsurabaya.com', 'Best Logistic Surabaya');
+		$email->setTo($order->order_status === 'bayar' ? 'bestlogisticsurabaya1@gmail.com' : $login->email);
+
+		$email->setSubject('Order Update | Best Logistic Surabaya');
+		$email->setMessage(view('order', [
+			'nama' => $login->name,
+			'resi' => $id,
+			'barang' => $order->order_nama,
+			'kirim' => $retail->retail_jalur.' ('.$retail->retail_jasa.')',
+			'tujuan' => $retail->retail_kab.' - '.$retail->retail_prov,
+			'status' => [
+				'order' => "Menunggu Struk Pembayaran",
+				'bayar' => "Menunggu Pembayaran Diverifikasi",
+				'tunggu' => "Menunggu Barang dikirim ke Drop Point",
+				'angkut' => "Barang sedang di proses untuk dikirim",
+				'kirim' => "Barang sedang proses pengiriman",
+				'sampai' => "Barang sudah sampai di tujuan",
+				'diterima' => "Barang sudah di terima",
+			][$order->order_status],
+		]));
+
+		$result = $email->send();
+		if (!$result) {
+			load_error($email->printDebugger())->pretend(false)->send();
+			exit;
+		}
+	}
+
 }

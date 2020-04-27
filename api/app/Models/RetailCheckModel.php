@@ -10,7 +10,8 @@ class RetailCheckModel extends BaseModel
 	protected $select = [
 		'retail_id',
 		'retail_jalur', 'retail_prov', 'retail_kab',
-		'retail_perkg', 'retail_kubikasi', 'retail_jasa'
+		'retail_perkg', 'retail_jasa',
+
 	];
 
 	protected function executeBeforeExecute($event)
