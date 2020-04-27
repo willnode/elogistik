@@ -49,17 +49,17 @@ export default function Balloon() {
         <Grid container>
           {
             [
-              ['Benny', '6281232221008', 'Heavy Cargo & Project', 'benny'],
-              ['Hamz', '6281380046039', 'Retail Cargo Maluku & Papua', 'ilham'],
-              ['Riza', '62895335572238', 'Retail Cargo Jawa & Kalimantan', 'riza'],
-              ['Desy', '6281380046038', 'Retail Cargo NTB & NTT', 'dessy'],
-              ['Widda', '6283831901981', 'Retail Cargo Bali & Sulawesi', 'widda'],
+              ['BENNY', '6281232221008', 'Heavy Cargo & Project', 'benny'],
+              ['HAMZ', '6281380046039', 'Retail Cargo Maluku & Papua', 'ilham'],
+              ['RIZA', '62895335572238', 'Retail Cargo Jawa & Kalimantan', 'riza'],
+              ['DESY', '6281380046038', 'Retail Cargo NTB & NTT', 'dessy'],
+              ['WIDDA', '6283831901981', 'Retail Cargo Bali & Sulawesi', 'widda'],
             ].map(([name, hp, title, img], i) =>
               <Grid key={hp} item xs={i < 2 ? 6 : 4}>
                 <div className="cs-item">
                   <img className="cs-avatar" src={`/assets/CHAT/${img}.png`} alt={name} />
                   <div className="cs-name">{name}</div>
-                  <Button component="a" className="title-name" key={name} target="_blank" rel="noopener noreferrer" href={`https://wa.me/${hp}?text=Halo+Best+Logistic,+Saya+Ingin+Menanyakan+Sesuatu,+Dapatkah+Anda+Membantu+Saya`} color="secondary" variant="contained">
+                  <Button component="a" size="small" className="title-name" key={name} target="_blank" rel="noopener noreferrer" href={`https://wa.me/${hp}?text=Halo+Best+Logistic,+Saya+Ingin+Menanyakan+Sesuatu,+Dapatkah+Anda+Membantu+Saya`} color="secondary" variant="contained">
                     {title}
                   </Button>
                 </div>

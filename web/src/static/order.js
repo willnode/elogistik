@@ -90,7 +90,7 @@ export default function Order() {
 					<FlexGroup label="Pengiriman Tujuan" marginTop={3} marginBottom={1} />
 					<Select name="retail_jalur" label="Jalur" options={
 						rrrrrr(jalurData.map(obj => [obj.retail_jalur, obj.retail_jalur]))
-					} value={jalur} onChange={e => [setJalur(e.target.value), setProv('')]} />
+					} value={jalur} onChange={e => [setJalur(e.target.value), setPulau('')]} />
 					{jalur && <Page src={`check_retail?groupBy=retail_pulau&retail_jalur=${jalur}`} dataCallback={(x) => setPulauData(x.data)}>
 						{pulauData && <><Select name="retail_pulau" label="Pulau" options={
 							rrrrrr(pulauData.map(obj => [obj.retail_pulau, obj.retail_pulau]))

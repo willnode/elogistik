@@ -17,7 +17,7 @@ const DrawerListItem = ({ to, icon, label }) => (
 
 function DrawerComponent({ children }) {
   let [drawerOpen, setDrawerOpen] = Context.bind('drawerOpen', useState(false));
-  useEffect(() => (() => Context.unbind('drawerOpen')), [])
+  // useEffect(() => (() => Context.unbind('drawerOpen')), [])
   let classes = { paper: 'drawer-paper' }
   return (
     <nav>

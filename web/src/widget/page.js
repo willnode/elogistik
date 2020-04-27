@@ -45,7 +45,6 @@ class Page extends Component {
           });
         }
       }).catch(e => {
-        console.log(e);
         this.setState({
           status: 'error'
         })

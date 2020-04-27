@@ -17,7 +17,7 @@ export default function Offline() {
 		'Maaf, kami mempunyai kendala yang tidak kami ketahui. Coba lagi nanti.';
 	let classes = useStyles();
 	return (
-		<Page maxWidth="xs">
+		<Page className="paper center" maxWidth="xs">
 			<SEO title="Offline :(" />
 			<div className={classes.paper}>
 				<Typography variant="h2" gutterBottom>Error :(</Typography>

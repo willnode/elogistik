@@ -145,11 +145,6 @@ const popMessages = () => {
 
 const getQueryParam = (param) => {
 	const urlParams = new URLSearchParams(history().location.search);
-	console.log(window.location.search)
-	console.log(history().location.search)
-	console.log(history())
-	console.log(param)
-	console.log(urlParams.get(param))
 	return urlParams.get(param);
 }
 
