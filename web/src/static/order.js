@@ -1,3 +1,4 @@
+import { SEO } from 'widget/page';
 import React from 'react';
 import Page from '../widget/page';
 import { Input, Form, Select, Submit, FlexGroup } from '../widget/controls';
