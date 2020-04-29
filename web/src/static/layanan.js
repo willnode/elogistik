@@ -12,7 +12,7 @@ function Darat() {
 		<SEO
 			title="Layanan Best Logistic Surabaya"
 			description="Best Logistics Surabaya memiliki beberapa layanan untuk pengiriman barang anda."
-			image="/assets/beranda/36.jpg"
+			image="/assets/beranda/36.jpeg"
 		/>
 		<h1>Jalur Pengiriman Darat</h1>
 		<div className="gallery-slider compact">

@@ -9,7 +9,7 @@ export default function Company() {
 		<SEO
       title="Company Profile Best Logistic Surabaya!"
       description="Company profile kami dapat memberikan anda informasi tentang Best Logistic Surabaya, mulai dari didirikannya Best Logistic Surabaya, legalitas, dan beberapa dokumentasi tentang apa yang kami lakukan."
-      image="/assets/beranda/36.jpg"
+      image="/assets/beranda/36.jpeg"
     />
 		<h1>Company Profile</h1>
 		<p>Company profile kami dapat memberikan anda informasi tentang Best Logistic Surabaya,

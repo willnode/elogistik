@@ -10,7 +10,7 @@ export default function Galeri() {
 		<SEO
       title="Gallery Best Logistic Surabaya"
       description="Anda dapat melihat hasil dokumentasi dari Best Logistic Surabaya, mulai dari Kegiatan hingga apa saja yang telah kami kerjakan."
-      image="/assets/beranda/36.jpg"
+      image="/assets/beranda/36.jpeg"
     /><h1>Galeri Best Logistics</h1>
 		<div className="gallery-slider gallery"><Slider infinite autoplay dots={true}>
 			{

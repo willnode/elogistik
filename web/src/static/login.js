@@ -84,7 +84,11 @@ export default function Login({ callback }) {
 
 export function LoginWithSEO () {
   return <>
-  <SEO title="Masuk" description="Masuk ke Member Area"/>
+  <SEO
+      title="Welcome to Best Logistic Surabaya!"
+      description="Best Logistics Surabaya adalah perusahaan yang bergerak dibidang jasa pengiriman barang / cargo atau ekspedisi yang didukung oleh tenaga kerja / SDM yang profesional dan cakap serta memiliki armada yang sehat dengan perawatan rutin."
+      image="/assets/beranda/36.jpeg"
+    />
   <Login />
   </>
 }

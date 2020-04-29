@@ -16,7 +16,7 @@ export default function About() {
 		<SEO
       title="About Best Logistic Surabaya"
       description="Best Logistics Surabaya adalah perusahaan yang bergerak dibidang jasa pengiriman barang / cargo atau ekspedisi."
-      image="/assets/beranda/36.jpg"
+      image="/assets/beranda/36.jpeg"
     /><h1>Tentang Best Logistic</h1>
 
 		<p>Best Logistics Surabaya adalah perusahaan yang bergerak dibidang jasa pengiriman barang / cargo atau ekspedisi </p>
