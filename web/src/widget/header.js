@@ -63,9 +63,7 @@ export default function Header({ children }) {
   return (
     <div className="head-sticky">
       <div className="head-static">
-        <Hidden xsDown>
-          <img className="head-avatar" src={publicUrl + '/assets/logo best logistic.png'} alt="Logo" />
-        </Hidden>
+        <img className="head-avatar" src={publicUrl + '/assets/logo best logistic.png'} alt="Logo" />
         <img style={{ maxHeight: 60, maxWidth: '90vw', margin: "auto" }} src={publicUrl + '/assets/header.png'} alt="Logo" />
       </div>
       <AppBar position="sticky" className="appbar-root">

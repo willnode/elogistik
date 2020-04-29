@@ -44,6 +44,13 @@ class OrderModel extends BaseModel
 			$builder->where('order_login', $this->login->current_id ?? 0);
 		} else {
 			$this->allowedFields[] = 'order_status';
+			if ($method === GET) {
+				if ($request->getGet('archive')) {
+					$builder->where('order_status !=', 'diterima');
+				} else {
+					$builder->where('order_status', 'diterima');
+				}
+			}
 		}
 		return $event;
 	}
@@ -107,7 +114,7 @@ class OrderModel extends BaseModel
 		$email = \Config\Services::email();
 
 		$email->setFrom('noreply@bestlogisticsurabaya.com', 'Best Logistic Surabaya');
-		$email->setTo($order->order_status === 'bayar' ? 'bestlogisticsurabaya1@gmail.com' : $login->email);
+		$email->setTo($order->order_status === 'bayar' ?  'bestlogisticsurabaya1@gmail.com' : $login->email);
 
 		$email->setSubject('Order Update | Best Logistic Surabaya');
 		$email->setMessage(view('order', [

@@ -38,11 +38,11 @@ export default function () {
       {
         data ? (
           <Form action={`${role}/profile`} redirect={submit}>
-            <Input validator={validators.name} name="name" label="Name" defaultValue={form.name} required />
+            <Input validator={validators.name} name="name" label="Nama" defaultValue={form.name} required />
             <Input validator={validators.email} name="email" label="Email" defaultValue={form.email} required type="email" />
-            <Input validator={validators.hp} name="hp" label="No HP" defaultValue={form.hp} required />
+            <Input validator={validators.hp} name="hp" label="No. HP" defaultValue={form.hp} required />
             <File folder="avatar" name="avatar" label="Avatar" defaultValue={form.avatar} accept="image/*"/>
-            <Box marginTop={5}>If you need to change your password, enter the new password:</Box>
+            <Box marginTop={5}>Jika anda membutuhkan password baru, masukkan data berikut:</Box>
             <Input validator={validators.oldpass} name="oldpass" label="Current Password" type="password" autoComplete="current-password" />
             <Input validator={validators.password} name="password" label="New Password" type="password" autoComplete="new-password" />
             <Input validator={validators.passconf} name="passconf" label="Re-enter New Password" type="password" autoComplete="new-password" />

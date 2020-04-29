@@ -10,16 +10,10 @@ import Grid from '@material-ui/core/Grid';
 import { Context } from '../main/Contexts';
 import { Popper } from '@material-ui/core';
 
-
-const HtmlTooltip = withStyles((theme) => ({
-  tooltip: {
-    backgroundColor: '#111111',
-    color: 'white',
-    width: '100vw',
-    fontSize: theme.typography.pxToRem(12),
-    border: '1px solid #dadde9',
-  },
-}))(Tooltip);
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
 
 export default function Balloon() {
@@ -38,29 +32,33 @@ export default function Balloon() {
     <Popper disablePortal open={open}>
       <div className="cs-container">
         <Typography className="cs-title">
-          Contact our Costumer Service
+          Hot Line Service
 			  </Typography>
-        <Grid container>
+        <List>
           {
             [
-              ['BENNY', '6281232221008', 'Heavy Cargo & Project', 'benny'],
-              ['HAMZ', '6281380046039', 'Retail Cargo Maluku & Papua', 'ilham'],
-              ['RIZA', '62895335572238', 'Retail Cargo Jawa & Kalimantan', 'riza'],
-              ['DESY', '6281380046038', 'Retail Cargo NTB & NTT', 'dessy'],
-              ['WIDDA', '6283831901981', 'Retail Cargo Bali & Sulawesi', 'widda'],
-            ].map(([name, hp, title, img], i) =>
-              <Grid key={hp} item xs={i < 2 ? 6 : 4}>
-                <div className="cs-item">
+              ['BENNY', 'CEO', '6281232221008', 'Heavy Cargo & Project', 'benny'],
+              ['HAMZ', 'Marketing', '6281380046039', 'Retail Cargo & Trucking Darat, Laut, Udara', 'ilham'],
+              ['DESSY', 'CSR', '6282334573264', 'Retail Cargo NTB & NTT', 'dessy'],
+              ['RIZA', 'CSO', '62895335572238', 'Retail Cargo Jawa & Kalimantan', 'riza'],
+              ['WIDDA', 'Marketing', '6283831901981', 'Retail Cargo Bali & Sulawesi', 'widda'],
+            ].map(([name, job, hp, title, img], i) =>
+              <ListItem key={hp} className="cs-item" component="a" button
+                target="_blank" rel="noopener noreferrer"
+                href={`https://wa.me/${hp}?text=Halo+Best+Logistic,+Saya+Ingin+Menanyakan+Sesuatu,+Dapatkah+Anda+Membantu+Saya`}
+              >
+                <ListItemIcon>
                   <img className="cs-avatar" src={`/assets/CHAT/${img}.png`} alt={name} />
+                </ListItemIcon>
+                <ListItemText>
+                  <div className="cs-job">{job}</div>
                   <div className="cs-name">{name}</div>
-                  <Button component="a" size="small" className="title-name" key={name} target="_blank" rel="noopener noreferrer" href={`https://wa.me/${hp}?text=Halo+Best+Logistic,+Saya+Ingin+Menanyakan+Sesuatu,+Dapatkah+Anda+Membantu+Saya`} color="secondary" variant="contained">
-                    {title}
-                  </Button>
-                </div>
-              </Grid>
+                  <div className="cs-title">{title}</div>
+                </ListItemText>
+              </ListItem>
             )
           }
-        </Grid>
+        </List>
       </div>
     </Popper>
   </div>

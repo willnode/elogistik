@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Button from '@material-ui/core/Button';
@@ -22,18 +22,21 @@ import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@material-ui/icons/Clear';
 import SortIcon from '@material-ui/icons/ArrowUpward';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArchiveIcon from '@material-ui/icons/Archive';
+import ArchiveRIcon from '@material-ui/icons/ArchiveRounded';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import NextPageIcon from '@material-ui/icons/NavigateNext';
 import PrevPageIcon from '@material-ui/icons/NavigateBefore';
 
 import {
-  setMessage, setError, login, serverGet,
-  serverDelete, serverPost, history, extractForm, popMessages
+  setMessage, setError, login, serverGet, history,
+  serverDelete, serverPost, extractForm, popMessages, getQueryParam
 } from '../main/Helper';
 import { Context } from '../main/Contexts';
 import MaterialTable from 'material-table';
 import { useRef } from 'react';
-import { useHandleControlValidator } from './validators';
+import { useHandleControlValidator, useHandlePropagateError } from './validators';
 import { uploadsUrl } from '../main/Config';
 
 function controlDelete(url, redirect) {
@@ -64,33 +67,34 @@ function controlPost(url, redirect) {
 
 
 function CheckRole({ role, children }) {
-  const path = useHistory().location.pathname;
-  return !login() || login().role !== role ? <Redirect to={'/login?redirect='+encodeURIComponent(path)} /> : children;
+  return !login() || login().role !== role ? <Redirect to={"/login/?redirect=" + encodeURIComponent(history().location.pathname)} /> : children;
 }
 
 
 const Input = ({ name, autoComplete, validator, onChange, ...props }) => {
   const ref = useRef();
+  const propagateError = useHandlePropagateError(ref);
   useHandleControlValidator(validator, ref);
   return <TextField
     name={name}
     inputRef={ref}
     fullWidth
     autoComplete={autoComplete || name}
-    error={validator && !!validator[0]}
-    helperText={validator && validator[0]}
+    error={validator && propagateError && !!validator[0]}
+    helperText={validator && propagateError && validator[0]}
     onChange={(e) => [validator && validator[3].current(e), onChange && onChange(e)]}
+    onFocus={(e) => [e.target.didHasFocus = true, validator && validator[2].current()]}
     margin='normal'
     {...props} />
 }
 
 const Select = ({ name, label, options, validator, onChange, ...props }) => {
   const ref = useRef();
+  const propagateError = useHandlePropagateError(ref);
   useHandleControlValidator(validator, ref);
   return <FormControl margin='normal' fullWidth>
     <InputLabel
-      error={validator && !!validator[0]}
-
+      error={validator && propagateError && !!validator[0]}
       id={name + '-label'}
     >{label}</InputLabel>
     <MUISelect
@@ -98,6 +102,7 @@ const Select = ({ name, label, options, validator, onChange, ...props }) => {
       labelId={name + '-label'}
       label={label}
       onChange={(e) => [validator && validator[3].current(e), onChange && onChange(e)]}
+      onFocus={(e) => [e.target.didHasFocus = true, validator && validator[2].current()]}
       {...props}
     >
       {
@@ -106,7 +111,7 @@ const Select = ({ name, label, options, validator, onChange, ...props }) => {
         ))
       }
     </MUISelect>
-    <FormHelperText>{validator && validator[0]}</FormHelperText>
+    <FormHelperText>{validator && propagateError && validator[0]}</FormHelperText>
   </FormControl>
 }
 
@@ -222,6 +227,18 @@ function RemoteTable({ src, itemKey, itemLabel, predefinedActions, title, action
   actions = useMemo(() => {
     return [...(actions || []), ...([
       {
+        key: 'back',
+        icon: () => <ArrowBackIcon />,
+        tooltip: 'Go Back',
+        isFreeAction: true,
+        onClick: () => history().goBack(),
+      }, {
+        key: 'archive',
+        icon: () => getQueryParam('archive') ? <ArchiveRIcon /> : <ArchiveIcon />,
+        tooltip: 'Toggle Archive',
+        isFreeAction: true,
+        onClick: () => history().replace(`?archive=${getQueryParam('archive') ? '' : '1'}`),
+      }, {
         key: 'add',
         icon: () => <AddIcon />,
         tooltip: 'Add ' + itemLabel,
