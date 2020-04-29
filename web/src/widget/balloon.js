@@ -37,10 +37,10 @@ export default function Balloon() {
               {
                 [
                   ['BENNY', 'CEO', '6281232221008', 'Heavy Cargo & Project', 'benny'],
-                  ['HAMZ', 'Marketing', '6281380046039', 'Retail Cargo & Trucking Darat, Laut, Udara', 'ilham'],
-                  ['DESSY', 'CSR', '6282334573264', 'Retail Cargo NTB & NTT', 'dessy'],
-                  ['RIZA', 'CSO', '62895335572238', 'Retail Cargo Jawa & Kalimantan', 'riza'],
-                  ['WIDDA', 'Marketing', '6283831901981', 'Retail Cargo Bali & Sulawesi', 'widda'],
+                  ['HAMZ', 'Marketing', '6281380046039', 'Specialist Trucking in Land, Air Freight & Container', 'ilham'],
+                  ['DESSY', 'CSR', '6282334573264', 'Retail Cargo Bali, NTB & NTT', 'dessy'],
+                  ['RIZA', 'CSO', '62895335572238', 'Retail Cargo Jawa, Kalimantan & Sulawesi', 'riza'],
+                  ['WIDDA', 'Marketing', '6283831901981', 'Specialist Sea Freight & Air Freight', 'widda'],
                 ].map(([name, job, hp, title, img], i) =>
                   <ListItem key={hp} className="cs-item" component="a" button
                     target="_blank" rel="noopener noreferrer"
