@@ -5,21 +5,19 @@ class UserModel extends BaseModel
 	protected $table = 'login';
 	protected $primaryKey = 'login_id';
 	protected $select = [
-		'login_id', 'username',	'email', 'name', 'avatar', 'otp',
+		'login_id', 'username',	'email', 'hp', 'name', 'avatar', 'otp'
 	];
 	protected $searchable = [
-		'username', 'email', 'name'
+		'username', 'email', 'name', 'hp',
 	];
 	protected $allowedFields = [
-		'name', 'email', 'avatar', 'username'
+		'name', 'email', 'avatar', 'hp', 'username'
 	];
 	protected $fileUploadRules = [
 		'avatar' => ['types' => ['jpg', 'jpeg', 'png', 'bmp']]
 	];
 	protected $validationRules = [
-		'name' => 'required|min_length[3]|alpha_numeric_space',
-		'email' => 'required|valid_email',
-		'username' => 'required|min_length[3]|alpha_numeric'
+		'name' => 'required',
 	];
 
 	function executeBeforeExecute($event)

@@ -14,13 +14,17 @@ class OrderModel extends BaseModel
 		'order_berat', 'order_kg', 'order_p',
 		'order_l', 'order_t',
 		'order_kind', 'order_price',
-		'order_payment', 'order_status', 'order_qty'
+		'order_payment', 'order_status', 'order_qty',
+		'updated_at',
 	];
 	protected $allowedFields = [
 		'order_retail', 'order_nama',
 		'order_kg', 'order_p',
 		'order_l', 'order_t',
 		'order_kind', 'order_payment', 'order_qty',
+		'order_recipient_name',
+		'order_recipient_hp',
+		'order_recipient_address',
 	];
 	protected $fileUploadRules = [
 		'order_payment' => ['types' => ['jpg', 'jpeg', 'png', 'bmp'], 'folder'=>'payment']
@@ -54,6 +58,7 @@ class OrderModel extends BaseModel
 		}
 		return $event;
 	}
+
 
 	protected function executeAfterFind($event) {
 		if (isset($event['id'])) {
@@ -106,15 +111,21 @@ class OrderModel extends BaseModel
 		}
 	}
 
+	protected function adminEmails() {
+		return array_map(function ($x) {
+			return $x->email;
+		}, $this->db->table('login')->select('email')->where('role', 'admin')->get()->getResult());
+	}
 	protected function sendEmail($id)
 	{
 		$order = get_values_at('order', ['order_id' => $id]);
+		$to_admin = $order->trucking_status === 'bayar';
 		$retail = get_values_at('retail', ['retail_id' => $order->order_retail]);
 		$login = get_values_at('login', ['login_id' => $order->order_login]);
 		$email = \Config\Services::email();
 
 		$email->setFrom('noreply@bestlogisticsurabaya.com', 'Best Logistic Surabaya');
-		$email->setTo($order->order_status === 'bayar' ?  'bestlogisticsurabaya1@gmail.com' : $login->email);
+		$email->setTo($to_admin ? $this->adminEmails() : $login->email);
 
 		$email->setSubject('Order Update | Best Logistic Surabaya');
 		$email->setMessage(view('order', [
@@ -123,6 +134,7 @@ class OrderModel extends BaseModel
 			'barang' => $order->order_nama,
 			'kirim' => $retail->retail_jalur.' ('.$retail->retail_jasa.')',
 			'tujuan' => $retail->retail_kab.' - '.$retail->retail_prov,
+			'to_admin' => $to_admin,
 			'status' => [
 				'order' => "Menunggu Struk Pembayaran",
 				'bayar' => "Menunggu Pembayaran Diverifikasi",

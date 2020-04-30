@@ -37,22 +37,29 @@ function RealOrder({ id, ok, setOk }) {
 					inputProps={{ min: 0 }} label="Berat (KG)" value={kg} onChange={(e) => setKg(e.target.value)} />
 			<Grid container spacing={3}>
 				<Grid item xs={12} sm={4}>
-					<Input name="order_p" type="number" inputProps={{ min: 0 }} label="Panjang (CM)" value={p} onChange={(e) => setP(e.target.value)} />
+          <Input name="order_p" type="number" inputProps={{ min: 0 }}
+          label="Panjang (CM)" value={p} onChange={(e) => setP(e.target.value)} />
 				</Grid>
 				<Grid item xs={12} sm={4}>
-					<Input name="order_l" type="number" inputProps={{ min: 0 }} label="Lebar (CM)" value={l} onChange={(e) => setL(e.target.value)} />
+          <Input name="order_l" type="number" inputProps={{ min: 0 }}
+          label="Lebar (CM)" value={l} onChange={(e) => setL(e.target.value)} />
 				</Grid>
 				<Grid item xs={12} sm={4}>
-					<Input name="order_t" type="number" inputProps={{ min: 0 }} label="Tinggi (CM)" value={t} onChange={(e) => setT(e.target.value)} />
+          <Input name="order_t" type="number" inputProps={{ min: 0 }}
+          label="Tinggi (CM)" value={t} onChange={(e) => setT(e.target.value)} />
 				</Grid>
 			</Grid>
-			<Input name="order_qty" type="number" inputProps={{ min: 1 }} label="Jumlah Barang" value={qty} onChange={(e) => setQty(e.target.value)} />
+      <Input name="order_qty" type="number" inputProps={{ min: 1 }}
+      label="Jumlah Barang" value={qty} onChange={(e) => setQty(e.target.value)} />
 			<FlexGroup label="Total Harga" marginY={2}>
 				{formatRupiah(harga)}
 			</FlexGroup>
 
 			{!ok && <Alert style={{ margin: '1rem 0' }} severity="info">{'Hitungan KG saat ini '+(berat*qty)+'  KG akan disetarakan menjadi '+data.retail_minkg+' KG'}</Alert>}
 			<Alert style={{ margin: '1rem 0' }} severity={login() ? "info" : "warning"}>{login() ? 'Data order anda akan dimasukkan ke akun anda' : 'Anda perlu masuk untuk melanjutkan'}</Alert>
+			<Input name="order_recipient_name" label="Nama Penerima" required/>
+			<Input name="order_recipient_hp" label="Nomor Kontak Penerima" required/>
+			<Input name="order_recipient_address" multiline label="Alamat Penerima" required/>
 		</div>}
 	</Page>
 }

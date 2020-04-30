@@ -2,6 +2,7 @@
 
 use App\Models\OrderModel;
 use App\Models\ProfileModel;
+use App\Models\TruckingModel;
 use App\Models\UserModel;
 
 class Admin extends BaseController
@@ -32,5 +33,10 @@ class Admin extends BaseController
 	public function order($id = NULL)
 	{
 		return (new OrderModel())->execute($id);
+	}
+
+	public function trucking($id = NULL)
+	{
+		return (new TruckingModel())->execute($id);
 	}
 }

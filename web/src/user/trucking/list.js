@@ -5,8 +5,8 @@ import { statusDict } from './detail';
 export default function () {
 	return <RemoteTable
 		title="Daftar Order"
-		src="user/order"
-		itemKey="order_id"
+		src="user/trucking"
+		itemKey="trucking_id"
 		itemLabel="Order"
 		predefinedActions={['archive', 'detail']}
 		columns={{

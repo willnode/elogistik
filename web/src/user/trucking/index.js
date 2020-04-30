@@ -7,7 +7,7 @@ export default ({ match }) => (
 	<Switch>
 		<Route exact path={match.url+'/'} component={List}/>
 		<Route exact path={match.url+'/create'}>
-			<Redirect to="/order/" />
+			<Redirect to="/trucking/" />
 		</Route>
 		<Route exact path={match.url+'/detail/:id'} component={Detail} />
 	</Switch>

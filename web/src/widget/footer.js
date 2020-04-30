@@ -9,6 +9,7 @@ import { DrawerListItem } from './drawer';
 import HomeIcon from '@material-ui/icons/Home';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
+import LocalShippingOutlinedIcon from '@material-ui/icons/LocalShippingOutlined';
 import DirectionsBoatIcon from '@material-ui/icons/DirectionsBoat';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import BusinessIcon from '@material-ui/icons/Business';
@@ -27,7 +28,8 @@ export default function Footer() {
 					<h3>Navigasi</h3>
 					<List>
 						<DrawerListItem to="/" icon={HomeIcon} label="Beranda" />
-						<DrawerListItem to="/order/" icon={ShoppingCartIcon} label="Order" />
+						<DrawerListItem to="/order/" icon={ShoppingCartIcon} label="Order Barang" />
+						<DrawerListItem to="/trucking/" icon={LocalShippingOutlinedIcon} label="Sewa Truk" />
 						<DrawerListItem to="/layanan/darat/" icon={LocalShippingIcon} label="Layanan Darat" />
 						<DrawerListItem to="/layanan/laut/" icon={DirectionsBoatIcon} label="Layanan Laut" />
 						<DrawerListItem to="/layanan/udara/" icon={FlightTakeoffIcon} label="Layanan Udara" />

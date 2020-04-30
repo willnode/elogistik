@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Page from '../../widget/page';
+import Page from 'widget/page';
 import {
 	Form, Submit, BackButton, File, Select, Input
-} from '../../widget/controls';
+} from 'widget/controls';
 import { useParams } from 'react-router-dom';
-import { doReload, history, formatRupiah } from '../../main/Helper';
+import { doReload, history, formatRupiah } from 'main/Helper';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -21,7 +21,7 @@ import Alert from '@material-ui/lab/Alert';
 import AlertTitle from '@material-ui/lab/AlertTitle';
 
 const statusDict = {
-	order: "Menunggu Struk Pembayaran",
+	trucking: "Menunggu Struk Pembayaran",
 	bayar: "Menunggu Pembayaran Diverifikasi",
 	tunggu: "Menunggu Barang dikirim ke Drop Point",
 	angkut: "Barang sedang di proses untuk dikirim",
@@ -30,7 +30,7 @@ const statusDict = {
 	diterima: "Barang sudah di terima",
 }
 const statusIcon = {
-	order: ReceiptIcon,
+	trucking: ReceiptIcon,
 	bayar: HourglassEmptyIcon,
 	tunggu: LocationOnIcon,
 	angkut: LocalOfferIcon,
@@ -40,10 +40,10 @@ const statusIcon = {
 }
 
 function OrderSubmit({ data }) {
-	const [dp, setDp] = React.useState(data.order_kind || '100');
+	const [dp, setDp] = React.useState(data.trucking_kind || '100');
 	return <>
 		<p>Kami menerima pembayaran penuh atau DP 50% dan 70%</p>
-		<Select name="order_kind" label="Jenis Pembayaran"
+		<Select name="trucking_kind" label="Jenis Pembayaran"
 			options={{
 				'50': 'DP 50%',
 				'70': 'DP 70%',
@@ -51,16 +51,16 @@ function OrderSubmit({ data }) {
 			}} value={dp} onChange={(e) => setDp(e.target.value)} required />
 		<p>Silakan membayar ke rekening berikut</p>
 		<p>BCA: <b>7480181268</b><br />
-			Sejumlah: <b>{formatRupiah(data.order_price * dp / 100)}</b><br />
+			Sejumlah: <b>{formatRupiah(data.trucking_price * dp / 100)}</b><br />
 			Atas Nama: <b>Rakhmat Benny Febrianto</b></p>
 		<p>Mohon upload struk pembayaran agar dapat diproses</p>
-		<File name="order_payment" label="Struk" folder="payment"
-			defaultValue={data.order_payment}
-			required={!data.order_payment} />
+		<File name="trucking_payment" label="Struk" folder="payment"
+			defaultValue={data.trucking_payment}
+			required={!data.trucking_payment} />
 		<Submit /></>
 }
 
-const statusOrder = ['order', 'bayar', 'tunggu', 'angkut', 'kirim', 'sampai', 'diterima']
+const statusOrder = ['trucking', 'bayar', 'tunggu', 'angkut', 'kirim', 'sampai', 'diterima']
 export {
 	statusDict, statusIcon, statusOrder
 }
@@ -79,23 +79,23 @@ export default function () {
 
 
 	return (
-		<Page className="paper center" maxWidth="sm" src={'user/order/' + id} dataCallback={setData}>
+		<Page className="paper center" maxWidth="sm" src={'user/trucking/' + id} dataCallback={setData}>
 
 			{data && (
-				<Form action={"user/order/" + id} redirect={id > 0 ? doReload : (json) => history().push('/user/order/detail/' + json.id)}>
-					<h1>Cek Status Order BLS{String(id).padStart(4, '0')}</h1>
+				<Form action={"user/trucking/" + id} redirect={id > 0 ? doReload : (json) => history().push('/user/trucking/detail/' + json.id)}>
+					<h1>Cek Status Order BLST{String(id).padStart(4, '0')}</h1>
 					<Page className="paper justify">
 						<h2>Info Barang</h2>
-						<Input value={`${data.order_nama}`} readOnly label="Nama Barang" />
-						<Input value={`${data.order_retail.retail_jalur} (${data.order_retail.retail_jasa})`} readOnly label="Jalur Pilihan" />
-						<Input value={`${data.order_retail.retail_prov} - ${data.order_retail.retail_kab}`} readOnly label="Lokasi Tujuan" />
+						<Input value={`${data.trucking_nama}`} readOnly label="Nama Barang" />
+						<Input value={`${data.trucking_retail.retail_jalur} (${data.trucking_retail.retail_jasa})`} readOnly label="Jalur Pilihan" />
+						<Input value={`${data.trucking_retail.retail_prov} - ${data.trucking_retail.retail_kab}`} readOnly label="Lokasi Tujuan" />
 					</Page>
 					<Page className="paper justify">
 						<h2>Status Order</h2>
 						<List>
 							{
-								((order) => {
-									let index = statusOrder.indexOf(order);
+								((trucking) => {
+									let index = statusOrder.indexOf(trucking);
 									let result = [];
 									for (let i = 0; i <= index; i++) {
 										if (i === index) {
@@ -109,12 +109,12 @@ export default function () {
 										}
 									}
 									return result;
-								})(data.order_status)
+								})(data.trucking_status)
 							}
 						</List>
 					</Page>
 					{
-						data.order_status === 'order' && <Page className="paper justify">
+						data.trucking_status === 'trucking' && <Page className="paper justify">
 							<Alert severity="warning">
 							<AlertTitle>Aksi diperlukan</AlertTitle>
 							Anda harus membayar terlebih dahulu agar pemesanan dapat diproses</Alert>
@@ -122,23 +122,24 @@ export default function () {
 						</Page>
 					}
 					{
-						data.order_status === 'tunggu' && <Page className="paper center">
+						data.trucking_status === 'tunggu' && <Page className="paper center">
 							<Alert severity="warning">
 								<AlertTitle>Aksi diperlukan</AlertTitle>
 								Mohon kirim barang ke Drop Point
 							</Alert>
 							<p>Lokasi Drop Point: </p>
 							{<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1176.442620715147!2d112.7321577531674!3d-7.346538647374439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7e5c8a23f4e13%3A0x7f32129b25bad9b2!2sBEST%20LOGISTIC%20SURABAYA!5e0!3m2!1sid!2sid!4v1586505310484!5m2!1sid!2sid"
-								title="Maps" width="100%" height="300" frameBorder="0" style={{ border: 0 }} allowFullScreen tabIndex="0"></iframe>}
+								title="Maps" width="100%" height="300" frameBtrucking="0" style={{ btrucking: 0 }} allowFullScreen tabIndex="0"></iframe>}
 						</Page>
 					}
 					{
-						data.order_status === 'sampai' && <Page className="paper center">
+						data.trucking_status === 'sampai' && <Page className="paper center">
 							<p></p>
 							<Alert severity="warning">
 								<AlertTitle>Aksi diperlukan</AlertTitle>
 								Mohon ambil barang di Pickup Point. Kontak CS kami untuk keterangan lebih lanjut.
 							</Alert>
+							<p>Lokasi Pickup Point: </p>
 						</Page>
 					}
 				</Form>)}

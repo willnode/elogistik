@@ -9,6 +9,7 @@ import Hidden from '@material-ui/core/Hidden';
 import HomeIcon from '@material-ui/icons/Home';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
+import LocalShippingOutlinedIcon from '@material-ui/icons/LocalShippingOutlined';
 import DirectionsBoatIcon from '@material-ui/icons/DirectionsBoat';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import BusinessIcon from '@material-ui/icons/Business';
@@ -27,6 +28,7 @@ import Offline from './offline';
 import Page404 from './404';
 import { login, getQueryParam } from 'main/Helper';
 import Order from './order';
+import Trucking from './trucking';
 import Layanan from './layanan';
 import Galeri from './galeri';
 import About from './about';
@@ -48,6 +50,7 @@ function Main() {
     </Route>
     <Route path="/layanan" component={Layanan} />
     <Route exact path="/order" component={Order} />
+    <Route exact path="/trucking" component={Trucking} />
     <Route exact path="/galeri" component={Galeri} />
     <Route exact path="/about" component={About} />
     <Route exact path="/company" component={Company} />
@@ -59,7 +62,8 @@ function LeftBar() {
     <DrawerComponent>
       <List>
         <DrawerListItem to="/" icon={HomeIcon} label="Beranda" />
-        <DrawerListItem to="/order/" icon={ShoppingCartIcon} label="Order" />
+        <DrawerListItem to="/order/" icon={ShoppingCartIcon} label="Order Barang" />
+        <DrawerListItem to="/trucking/" icon={LocalShippingOutlinedIcon} label="Sewa Truk" />
         <DrawerListItem to="/layanan/darat/" icon={LocalShippingIcon} label="Layanan Darat" />
         <DrawerListItem to="/layanan/laut/" icon={DirectionsBoatIcon} label="Layanan Laut" />
         <DrawerListItem to="/layanan/udara/" icon={FlightTakeoffIcon} label="Layanan Udara" />

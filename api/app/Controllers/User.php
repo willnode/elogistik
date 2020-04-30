@@ -2,6 +2,7 @@
 
 use App\Models\ProfileModel;
 use App\Models\OrderModel;
+use App\Models\TruckingModel;
 
 class User extends BaseController
 {
@@ -25,5 +26,10 @@ class User extends BaseController
 	public function order($id = NULL)
 	{
 		return (new OrderModel())->execute($id);
+	}
+
+	public function trucking($id = NULL)
+	{
+		return (new TruckingModel())->execute($id);
 	}
 }

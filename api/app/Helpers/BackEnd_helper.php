@@ -66,7 +66,8 @@ function control_file_delete($folder, $existing_value = '')
 
 /**
  * Handle file upload on POST, and also delete existing file in previous data (so no orphan files).
- * $attr => ['folder', 'types', 'required', 'custom_file_name' ]
+ * @param string $name
+ * @param mixed[] $attr = ['folder', 'types', 'required', 'custom_file_name' ]
  */
 function control_file_upload(&$updates, $name, $attr, $existing_row = NULL)
 {
