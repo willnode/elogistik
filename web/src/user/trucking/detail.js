@@ -6,12 +6,14 @@ import {
 import { useParams } from 'react-router-dom';
 import { doReload, history, formatRupiah } from 'main/Helper';
 import ReceiptIcon from '@material-ui/icons/Receipt';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import LocalShipping from '@material-ui/icons/LocalShipping';
 import RedeemIcon from '@material-ui/icons/Redeem';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import FormLabel from '@material-ui/core/FormLabel';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -21,7 +23,8 @@ import Alert from '@material-ui/lab/Alert';
 import AlertTitle from '@material-ui/lab/AlertTitle';
 
 const statusDict = {
-	trucking: "Menunggu Struk Pembayaran",
+	antri: "Menunggu Pengefikan Harga",
+	order: "Menunggu Struk Pembayaran",
 	bayar: "Menunggu Pembayaran Diverifikasi",
 	tunggu: "Menunggu Barang dikirim ke Drop Point",
 	angkut: "Barang sedang di proses untuk dikirim",
@@ -30,7 +33,8 @@ const statusDict = {
 	diterima: "Barang sudah di terima",
 }
 const statusIcon = {
-	trucking: ReceiptIcon,
+	antri: AttachMoneyIcon,
+	order: ReceiptIcon,
 	bayar: HourglassEmptyIcon,
 	tunggu: LocationOnIcon,
 	angkut: LocalOfferIcon,
@@ -60,7 +64,7 @@ function OrderSubmit({ data }) {
 		<Submit /></>
 }
 
-const statusOrder = ['trucking', 'bayar', 'tunggu', 'angkut', 'kirim', 'sampai', 'diterima']
+const statusOrder = ['antri', 'order', 'bayar', 'tunggu', 'angkut', 'kirim', 'sampai', 'diterima']
 export {
 	statusDict, statusIcon, statusOrder
 }
@@ -69,7 +73,7 @@ function ListItemOrder({ color, i, ok }) {
 	const text = statusDict[statusOrder[i]];
 	return <ListItem>
 		<ListItemIcon><Icon fontSize="large" color={color} /></ListItemIcon>
-		<ListItemText ><Typography color={color}>{ok ? <><s>{text}</s>&nbsp;<CheckCircleIcon style={{float: 'right'}} fontSize="small" /></> : text}</Typography></ListItemText>
+		<ListItemText ><Typography color={color}>{ok ? <><s>{text}</s>&nbsp;<CheckCircleIcon style={{ float: 'right' }} fontSize="small" /></> : text}</Typography></ListItemText>
 	</ListItem>
 }
 export default function () {
@@ -85,10 +89,15 @@ export default function () {
 				<Form action={"user/trucking/" + id} redirect={id > 0 ? doReload : (json) => history().push('/user/trucking/detail/' + json.id)}>
 					<h1>Cek Status Order BLST{String(id).padStart(4, '0')}</h1>
 					<Page className="paper justify">
-						<h2>Info Barang</h2>
-						<Input value={`${data.trucking_nama}`} readOnly label="Nama Barang" />
-						<Input value={`${data.trucking_retail.retail_jalur} (${data.trucking_retail.retail_jasa})`} readOnly label="Jalur Pilihan" />
-						<Input value={`${data.trucking_retail.retail_prov} - ${data.trucking_retail.retail_kab}`} readOnly label="Lokasi Tujuan" />
+						<h2>Info Order</h2>
+						<Input value={data.trucking_barang} readOnly label="Nama Barang" />
+						<Input value={data.trucking_armada} readOnly label="Armada Pilihan" />
+						<FormLabel component="legend">Start Rute</FormLabel>
+						<Input value={data.trucking_start} multiline readOnly label="Mulai Rute" />
+						<FormLabel component="legend">Rute Selanjutnya</FormLabel>
+						{
+							data.trucking_tujuan.map((x, i) => <Input key={i} value={x.tujuan_alamat} multiline readOnly />)
+						}
 					</Page>
 					<Page className="paper justify">
 						<h2>Status Order</h2>
@@ -116,8 +125,8 @@ export default function () {
 					{
 						data.trucking_status === 'trucking' && <Page className="paper justify">
 							<Alert severity="warning">
-							<AlertTitle>Aksi diperlukan</AlertTitle>
-							Anda harus membayar terlebih dahulu agar pemesanan dapat diproses</Alert>
+								<AlertTitle>Aksi diperlukan</AlertTitle>
+								Anda harus membayar terlebih dahulu agar pemesanan dapat diproses</Alert>
 							<OrderSubmit data={data} />
 						</Page>
 					}
@@ -139,7 +148,6 @@ export default function () {
 								<AlertTitle>Aksi diperlukan</AlertTitle>
 								Mohon ambil barang di Pickup Point. Kontak CS kami untuk keterangan lebih lanjut.
 							</Alert>
-							<p>Lokasi Pickup Point: </p>
 						</Page>
 					}
 				</Form>)}

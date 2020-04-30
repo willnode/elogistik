@@ -13,7 +13,8 @@ class TruckingModel extends BaseModel
 		'trucking_id', 	'trucking_login',
 		'trucking_barang', 'trucking_armada',
 		'trucking_start', 'trucking_status',
-		'trucking_price',
+		'trucking_price', 'trucking_payment',
+		'created_at', 'updated_at'
 	];
 	protected $allowedFields = [
 		'trucking_barang', 'trucking_armada',
@@ -46,9 +47,9 @@ class TruckingModel extends BaseModel
 		}
 		if ($method === GET) {
 			if ($request->getGet('archive')) {
-				$builder->where('trucking_status !=', 'diterima');
-			} else {
 				$builder->where('trucking_status', 'diterima');
+			} else {
+				$builder->where('trucking_status !=', 'diterima');
 			}
 		}
 		return $event;
@@ -118,7 +119,7 @@ class TruckingModel extends BaseModel
 		$email->setTo($to_admin ? $this->adminEmails() : $login->email);
 
 		$email->setSubject('Order Update | Best Logistic Surabaya');
-		$email->setMessage(view('trucking', [
+		$email->setMessage(view('truck', [
 			'nama' => $login->name,
 			'resi' => $id,
 			'barang' => $trucking->trucking_barang,

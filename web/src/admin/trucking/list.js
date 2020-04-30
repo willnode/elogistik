@@ -1,24 +1,23 @@
 import React from 'react';
 import { RemoteTable } from 'widget/controls';
-import { statusDict } from 'user/order/detail';
+import { statusDict } from 'user/trucking/detail';
 
 export default function () {
 	return <RemoteTable
 		key={window.location.search}
-		title="Daftar Order"
-		src="admin/order"
-		itemKey="order_id"
+		title="Daftar Sewa Truk"
+		src="admin/trucking"
+		itemKey="trucking_id"
 		itemLabel="Order"
 		predefinedActions={['archive', 'edit']}
 		columns={{
-			order_nama: 'Nama Barang',
-			order_status: {
-				title: 'Status Order',
+			trucking_barang: 'Nama Barang',
+			trucking_status: {
+				title: 'Status Sewa',
 				render: row => (
-					statusDict[row.order_status]
+					statusDict[row.trucking_status]
 				),
 			},
 			updated_at: 'Terakhir Update',
-
 		}} />
 }

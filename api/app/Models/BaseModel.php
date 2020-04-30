@@ -255,7 +255,7 @@ class BaseModel extends Model
 	/** @return CodeIgniter\HTTP\Response */
 	public function execute($id = NULL) {
 		helper('BackEnd');
-
+		if ($id === "") $id = NULL;
 		$cursor = $this->builder();
 		$request = Services::request();
 		$method = $request->getMethod();

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import Page from '../../widget/page';
+import Page from 'widget/page';
 import {
 	Form, Input, Submit, BackButton,
 	Select,
 	File
-} from '../../widget/controls';
+} from 'widget/controls';
 import { useParams } from 'react-router-dom';
-import { doReload, history, formatRupiah } from '../../main/Helper';
+import { doReload, history, formatRupiah } from 'main/Helper';
 
-import { statusDict } from '../../user/order/detail';
+import { statusDict } from 'user/order/detail';
 
 export default function () {
 	const id = useParams().id || 0;

@@ -48,12 +48,13 @@ class OrderModel extends BaseModel
 			$builder->where('order_login', $this->login->current_id ?? 0);
 		} else {
 			$this->allowedFields[] = 'order_status';
-			if ($method === GET) {
-				if ($request->getGet('archive')) {
-					$builder->where('order_status !=', 'diterima');
-				} else {
-					$builder->where('order_status', 'diterima');
-				}
+
+		}
+		if ($method === GET) {
+			if ($request->getGet('archive')) {
+				$builder->where('order_status', 'diterima');
+			} else {
+				$builder->where('order_status !=', 'diterima');
 			}
 		}
 		return $event;

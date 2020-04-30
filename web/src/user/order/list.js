@@ -4,6 +4,7 @@ import { statusDict } from './detail';
 
 export default function () {
 	return <RemoteTable
+		key={window.location.search}
 		title="Daftar Order"
 		src="user/order"
 		itemKey="order_id"

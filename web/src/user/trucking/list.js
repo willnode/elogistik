@@ -4,19 +4,20 @@ import { statusDict } from './detail';
 
 export default function () {
 	return <RemoteTable
-		title="Daftar Order"
+		key={window.location.search}
+		title="Daftar Order Sewa Truk"
 		src="user/trucking"
 		itemKey="trucking_id"
 		itemLabel="Order"
 		predefinedActions={['archive', 'detail']}
 		columns={{
-			order_nama: 'Nama Barang',
-			updated_at: 'Terakhir Update',
-			order_status: {
+			trucking_barang: 'Nama Barang',
+			trucking_status: {
 				title: 'Status Order',
 				render: row => (
-					statusDict[row.order_status]
+					statusDict[row.trucking_status]
 				),
 			},
+
 		}} />
 }

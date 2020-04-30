@@ -13,7 +13,8 @@ export default function () {
     <Typography variant="h4" gutterBottom>Selamat Datang, {login().name}</Typography>
     <ButtonGroup variant="contained" color="primary">
       <Button component={Link} to="/admin/profile/">Profile</Button>
-      <Button component={Link} to="/admin/order/">Cek Order</Button>
+      <Button component={Link} to="/admin/order/">Cek Order Barang</Button>
+      <Button component={Link} to="/admin/trucking/">Cek Sewa Truk</Button>
     </ButtonGroup>
   </Page>
 }

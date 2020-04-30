@@ -24,7 +24,7 @@ import SortIcon from '@material-ui/icons/ArrowUpward';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArchiveIcon from '@material-ui/icons/Archive';
-import ArchiveRIcon from '@material-ui/icons/ArchiveRounded';
+import ArchiveRIcon from '@material-ui/icons/ArchiveOutlined';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import NextPageIcon from '@material-ui/icons/NavigateNext';
 import PrevPageIcon from '@material-ui/icons/NavigateBefore';
@@ -282,6 +282,7 @@ function RemoteTable({ src, itemKey, itemLabel, predefinedActions, title, action
   }, []); // Always only updated once
   data = data || (query => new Promise((resolve, reject) => {
     let url = src + '?' + new URLSearchParams(query).toString();
+    if (window.location.search) url += '&' + window.location.search.substr(1);
     serverGet(url).then(r => mounted.current && resolve(r));
   })); // Already sync with our server
   options = options || {};
