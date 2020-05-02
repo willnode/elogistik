@@ -34,9 +34,9 @@ export default function Trucking() {
         </Grid>
         <Grid item md={6}>
           <FormControl component="fieldset" style={{ width: '100%' }}>
-            <FormLabel component="legend">Start Rute</FormLabel>
+            <FormLabel component="legend">Asal Barang (Mohon Diisi Alamat Lengkap)</FormLabel>
             <Input multiline name="trucking_start" />
-            <FormLabel component="legend">Rute Selanjutnya</FormLabel>
+            <FormLabel component="legend">Tujuan Barang (Mohon Diisi Alamat Lengkap)</FormLabel>
             {
               rutes.map((x, i) => <Input key={i} value={x} multiline required name="tujuan[]"
                 onChange={(e) => [rutes[i] = e.target.value, setRutes([...rutes])]} />)
