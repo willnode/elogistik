@@ -13,7 +13,8 @@ class TruckingModel extends BaseModel
 		'trucking_id', 	'trucking_login',
 		'trucking_barang', 'trucking_armada',
 		'trucking_start', 'trucking_status',
-		'trucking_price', 'trucking_payment',
+		'trucking_price', 'trucking_kind',
+		'trucking_payment',
 		'created_at', 'updated_at'
 	];
 	protected $allowedFields = [
@@ -38,7 +39,7 @@ class TruckingModel extends BaseModel
 				$event['response'] = load_405();
 			}
 			if ($method === UPDATE) {
-				$this->allowedFields = ['trucking_payment'];
+				$this->allowedFields = ['trucking_payment', 'trucking_kind'];
 			}
 			$builder->where('trucking_login', $this->login->current_id ?? 0);
 		} else {

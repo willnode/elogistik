@@ -43,7 +43,7 @@ class OrderModel extends BaseModel
 		$this->login = $request->login;
 		if ($this->login->data->role === 'user') {
 			if ($method === UPDATE) {
-				$this->allowedFields = ['order_payment'];
+				$this->allowedFields = ['order_payment', 'order_kind'];
 			}
 			$builder->where('order_login', $this->login->current_id ?? 0);
 		} else {
