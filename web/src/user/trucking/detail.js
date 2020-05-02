@@ -123,7 +123,19 @@ export default function () {
 						</List>
 					</Page>
 					{
-						data.trucking_status === 'trucking' && <Page className="paper justify">
+						data.trucking_status === 'antri' && <Page className="paper justify">
+							<Alert severity="info">
+								<AlertTitle>Mohon Menunggu</AlertTitle>
+								Anda juga dapat
+								<a href="https://wa.me/6281380046039?text=Halo+Best+Logistic,+Saya+Ingin+Menanyakan+Tentang+Pengefikan+Harga+Sewa+Truk"
+								target="_blank" rel="noopener noreferrer">menanyakan Kami</a>
+								untuk info lebih lanjut.
+								</Alert>
+
+						</Page>
+					}
+					{
+						data.trucking_status === 'order' && <Page className="paper justify">
 							<Alert severity="warning">
 								<AlertTitle>Aksi diperlukan</AlertTitle>
 								Anda harus membayar terlebih dahulu agar pemesanan dapat diproses</Alert>

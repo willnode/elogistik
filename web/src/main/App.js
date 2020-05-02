@@ -22,6 +22,9 @@ class App extends Component {
       document.getElementById("main").scrollIntoView({behavior: "smooth"});
       popMessages();
     }); // Think we don't need unmount, eh?
+    if (window.location.hash === '#chat') {
+      Context.set('balloon', true);
+    }
   }
   generateBinding(key) {
     return [this.state[key], (v) => this.setState(() => ({ [key]: v }))]

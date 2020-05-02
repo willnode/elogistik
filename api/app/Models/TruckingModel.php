@@ -128,7 +128,7 @@ class TruckingModel extends BaseModel
 			'to_admin' => $to_admin,
 			'status' => [
 				'antri' => "Menunggu Pengefikan Harga",
-				'trucking' => "Menunggu Struk Pembayaran",
+				'order' => "Menunggu Struk Pembayaran",
 				'bayar' => "Menunggu Pembayaran Diverifikasi",
 				'tunggu' => "Menunggu Barang dikirim ke Drop Point",
 				'angkut' => "Barang sedang di proses untuk dikirim",

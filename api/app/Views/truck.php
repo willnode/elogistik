@@ -74,11 +74,11 @@
         </tbody>
 	  </table>
     <?php if ($to_admin) : ?>
-      <p><b>Ini adalah notifikasi untuk Admin.</b> Silahkan mengatur status order ini di <a href="https://bestlogisticsurabaya.com/admin/order/detail/<?= $resi ?>">Area member</a></p>
+      <p><b>Ini adalah notifikasi untuk Admin.</b> Silahkan mengatur status sewa ini di <a href="https://bestlogisticsurabaya.com/admin/trucking/detail/<?= $resi ?>">Area member</a></p>
     <?php else : ?>
       <p>
         Terima kasih telah menyewa truck dengan Best Logistic Surabaya. <br>
-        Anda selalu dapat mengecek status order anda di <a href="https://bestlogisticsurabaya.com/user/order/detail/<?= $resi ?>">Area member</a>. <br>
+        Anda selalu dapat mengecek status sewa truk anda di <a href="https://bestlogisticsurabaya.com/user/trucking/detail/<?= $resi ?>">Area member</a>. <br>
         Anda juga dapat <a href="https://bestlogisticsurabaya.com/#chat" target="_blank">bertanya pada kami</a> sewaktu-waktu.</p>
     <?php endif ?>
     </div>
