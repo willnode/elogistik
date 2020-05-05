@@ -14,6 +14,7 @@ function SEO({ title, description, image, url }) {
     {title ? <title>{title + ((titlePostFix && title && " | ") || '') + titlePostFix}</title> : null}
     {description ? <meta name="description" content={description} /> : null}
     {image ? <meta name="image" content={image} /> : null}
+    {image ? <meta name="thumbnail" content={image} /> : null}
     {url ? <link rel="canonical" href={url} /> : null}	{/* OpenGraph tags */}
     {url ? <meta property="og:url" content={url} /> : null}
     {title ? <meta property="og:title" content={title} /> : null}
