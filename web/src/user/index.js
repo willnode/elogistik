@@ -5,7 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import Order from './order';
 import Trucking from './trucking';
 import Dashboard from './dashboard';
-import Profile from 'shared/profile';
+import Profile from 'widget/shared/profile';
 import Page404 from 'static/404';
 import { CheckRole } from 'widget/controls';
 import { SEO } from 'widget/page';
