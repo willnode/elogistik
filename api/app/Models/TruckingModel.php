@@ -10,6 +10,7 @@ class TruckingModel extends BaseModel
 	protected $primaryKey = 'trucking_id';
 	protected $indexable = [ 'trucking_status' ];
 	protected $select = [
+		"CONCAT('BLST', LPAD(trucking_id, 4, '0')) AS trucking_resi",
 		'trucking_id', 	'trucking_login',
 		'trucking_barang', 'trucking_armada',
 		'trucking_start', 'trucking_status',

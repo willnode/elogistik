@@ -29,7 +29,11 @@ export default function () {
 					<Input value={`${data.order_retail.retail_jalur} (${data.order_retail.retail_jasa})`} readOnly label="Jalur Pilihan" />
 					<Input value={`${data.order_retail.retail_prov} - ${data.order_retail.retail_kab}`} readOnly label="Lokasi Tujuan" />
 					<Input value={data.order_retail.retail_perkg} readOnly label="Retail Per KG"/>
-					<h2>Orderan</h2>
+					<h2>Info Penerima</h2>
+					<Input value={data.order_recipient_name} readOnly label="Nama"/>
+					<Input value={data.order_recipient_hp} readOnly label="HP"/>
+					<Input value={data.order_recipient_address} multiline readOnly label="Alamat"/>
+					<h2>Info Orderan</h2>
 					<Input value={data.order_berat + ' KG * ' + data.order_qty} readOnly label="Berat dan Qty"/>
 					<Input value={data.order_kind || ''} readOnly label="Jenis Pembayaran"/>
 					<Input value={formatRupiah(data.order_price)} readOnly label="Harga (Full)"/>

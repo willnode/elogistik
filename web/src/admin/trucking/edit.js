@@ -6,7 +6,7 @@ import {
 	File
 } from 'widget/controls';
 import { useParams } from 'react-router-dom';
-import { doReload, history } from 'main/Helper';
+import { doReload, history, formatRupiah } from 'main/Helper';
 import FormLabel from '@material-ui/core/FormLabel';
 import { statusDict } from 'user/trucking/detail';
 
@@ -34,6 +34,8 @@ export default function () {
 						data.trucking_tujuan.map((x, i) => <Input key={i} value={x.tujuan_alamat} multiline readOnly />)
 					}
 					<File defaultValue={data.trucking_payment} folder="payment" readOnly label="Struk Pembayaran" />
+					{data.trucking_kind && <Input value={formatRupiah(data.trucking_price * data.trucking_kind / 100)} readOnly label="Harga (DP)"/>}
+					{data.trucking_kind && <Input value={formatRupiah(data.trucking_price * (100 - data.trucking_kind) / 100)} readOnly label="Harga (Sudah Sampai)"/>}
 
 					<h2 children="Edit Status" />
 					<Input name="trucking_price" label="Harga Fix" defaultValue={data.trucking_price} />

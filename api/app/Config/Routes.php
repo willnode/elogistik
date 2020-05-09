@@ -33,6 +33,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->get('/login', 'Home::login');
 $routes->add('/register', 'Home::register');
+$routes->add('/forgot', 'Home::forgot');
 $routes->get('/check_retail', 'Home::check_retail');
 $routes->get('/check_retail/(:any)', 'Home::check_retail/$1');
 $routes->get('/uploads/(:any)/(:any)', 'Home::uploads/$1/$2');

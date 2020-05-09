@@ -11,6 +11,7 @@ export default function () {
 		itemLabel="Order"
 		predefinedActions={['archive', 'edit']}
 		columns={{
+			order_resi: 'Resi Barang',
 			order_nama: 'Nama Barang',
 			order_status: {
 				title: 'Status Order',
@@ -18,7 +19,6 @@ export default function () {
 					statusDict[row.order_status]
 				),
 			},
-			updated_at: 'Terakhir Update',
-
+			order_updated: 'Terakhir Update',
 		}} />
 }

@@ -8,14 +8,19 @@ class OrderModel extends BaseModel
 	protected $table = 'order';
 	protected $primaryKey = 'order_id';
 	protected $indexable = [ 'order_status' ];
+	protected $searchable = [ 'order_nama', 'order_id' ];
 	protected $select = [
+		"CONCAT('BLS', LPAD(order_id, 4, '0')) AS order_resi",
 		'order_id', 'order_retail',
 		'order_login', 'order_nama',
 		'order_berat', 'order_kg', 'order_p',
 		'order_l', 'order_t',
 		'order_kind', 'order_price',
 		'order_payment', 'order_status', 'order_qty',
-		'updated_at',
+		'order_updated','order_created',
+		'order_recipient_name',
+		'order_recipient_hp',
+		'order_recipient_address',
 	];
 	protected $allowedFields = [
 		'order_retail', 'order_nama',
@@ -120,7 +125,7 @@ class OrderModel extends BaseModel
 	protected function sendEmail($id)
 	{
 		$order = get_values_at('order', ['order_id' => $id]);
-		$to_admin = $order->trucking_status === 'bayar';
+		$to_admin = $order->order_status === 'bayar';
 		$retail = get_values_at('retail', ['retail_id' => $order->order_retail]);
 		$login = get_values_at('login', ['login_id' => $order->order_login]);
 		$email = \Config\Services::email();
