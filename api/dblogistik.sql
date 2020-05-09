@@ -35,7 +35,7 @@ DELETE FROM `elogistik_login`;
 /*!40000 ALTER TABLE `elogistik_login` DISABLE KEYS */;
 INSERT INTO `elogistik_login` (`login_id`, `username`, `email`, `hp`, `password`, `otp`, `name`, `avatar`, `role`, `created_at`, `updated_at`) VALUES
 	(1, 'admin', 'admin@example.com', NULL, '$2y$10$6bLxbvRVV9BrZTfakigBheD9K0s4m.5pw/rihrZq34K4G9XUrEhFu', NULL, 'My Admin', '', 'admin', '2020-04-08 17:12:01', '2020-04-08 17:12:01'),
-	(2, 'user', 'user@example.com', NULL, '$2y$10$koDtw/VxdW491Cm9v6eVY.AafOfSoG1C6tavQ.xKBtIV7FiCmhQ3y', NULL, 'Wildan Mubarok', '', 'user', '2020-04-08 17:12:01', '2020-04-27 06:27:52');
+	(2, 'user', 'user@example.com', '08123456789', '$2y$10$390Llk4TkrleBquG.B/C5Omm9898uSeHIRmcOOBWBY9atvD9huxR6', NULL, 'My User', '', 'user', '2020-04-08 17:12:01', '2020-05-09 14:01:05');
 /*!40000 ALTER TABLE `elogistik_login` ENABLE KEYS */;
 
 -- Dumping structure for table dblogistik.elogistik_migrations
@@ -83,11 +83,14 @@ CREATE TABLE IF NOT EXISTS `elogistik_order` (
   KEY `FK__elogistik_retail` (`order_retail`),
   CONSTRAINT `FK__elogistik_retail` FOREIGN KEY (`order_retail`) REFERENCES `elogistik_retail` (`retail_id`) ON DELETE SET NULL,
   CONSTRAINT `FK_elogistik_order_elogistik_login` FOREIGN KEY (`order_login`) REFERENCES `elogistik_login` (`login_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
--- Dumping data for table dblogistik.elogistik_order: ~0 rows (approximately)
+-- Dumping data for table dblogistik.elogistik_order: ~2 rows (approximately)
 DELETE FROM `elogistik_order`;
 /*!40000 ALTER TABLE `elogistik_order` DISABLE KEYS */;
+INSERT INTO `elogistik_order` (`order_id`, `order_retail`, `order_login`, `order_nama`, `order_kg`, `order_p`, `order_l`, `order_t`, `order_kind`, `order_price`, `order_berat`, `order_qty`, `order_recipient_name`, `order_recipient_hp`, `order_recipient_address`, `order_payment`, `order_status`, `order_created`, `order_updated`) VALUES
+	(7, 194, 2, 'Testing', 100, 3, 3, 17, NULL, 3900000, 100, 6, 'Mega', '081234', 'Lawas', NULL, 'order', '2020-05-09 12:32:38', '2020-05-09 12:32:38'),
+	(8, 194, 2, 'Testing', 100, 3, 3, 17, NULL, 3900000, 100, 6, 'Mega', '081234', 'Lawas', NULL, 'order', '2020-05-09 12:33:37', '2020-05-09 12:33:37');
 /*!40000 ALTER TABLE `elogistik_order` ENABLE KEYS */;
 
 -- Dumping structure for table dblogistik.elogistik_retail
@@ -559,6 +562,7 @@ CREATE TABLE IF NOT EXISTS `elogistik_trucking` (
   `trucking_start` varchar(2048) DEFAULT NULL,
   `trucking_status` enum('antri','order','bayar','tunggu','angkut','kirim','sampai','diterima') NOT NULL DEFAULT 'antri',
   `trucking_payment` varchar(255) DEFAULT NULL,
+  `trucking_kind` enum('50','70','100') DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`trucking_id`),
@@ -569,8 +573,8 @@ CREATE TABLE IF NOT EXISTS `elogistik_trucking` (
 -- Dumping data for table dblogistik.elogistik_trucking: ~1 rows (approximately)
 DELETE FROM `elogistik_trucking`;
 /*!40000 ALTER TABLE `elogistik_trucking` DISABLE KEYS */;
-INSERT INTO `elogistik_trucking` (`trucking_id`, `trucking_login`, `trucking_barang`, `trucking_armada`, `trucking_price`, `trucking_start`, `trucking_status`, `trucking_payment`, `created_at`, `updated_at`) VALUES
-	(1, 2, 'Ga', 'Wings Box', 400000, 'A', 'sampai', NULL, '2020-04-30 18:26:39', '2020-04-30 18:56:28');
+INSERT INTO `elogistik_trucking` (`trucking_id`, `trucking_login`, `trucking_barang`, `trucking_armada`, `trucking_price`, `trucking_start`, `trucking_status`, `trucking_payment`, `trucking_kind`, `created_at`, `updated_at`) VALUES
+	(1, 2, 'Ga', 'Wings Box', 400000, 'A', 'sampai', NULL, NULL, '2020-04-30 18:26:39', '2020-04-30 18:56:28');
 /*!40000 ALTER TABLE `elogistik_trucking` ENABLE KEYS */;
 
 -- Dumping structure for table dblogistik.elogistik_trucking_tujuan

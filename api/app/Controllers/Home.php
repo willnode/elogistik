@@ -1,4 +1,6 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 use App\Models\LoginModel;
 use App\Models\RegisterModel;
@@ -12,7 +14,7 @@ class Home extends BaseController
 	public function index()
 	{
 		return load_info([
-			'routes'=>[
+			'routes' => [
 				'/login/',
 				'/forgot/',
 				'/register/',
@@ -38,28 +40,52 @@ class Home extends BaseController
 		}
 	}
 
+	protected function sendForgotEmail($login, $otp)
+	{
+		$email = \Config\Services::email();
 
+		$email->setFrom('noreply@bestlogisticsurabaya.com', 'Best Logistic Surabaya');
+		$email->setTo($login->email);
+
+		$email->setSubject('Reset Ulang Password | Best Logistic Surabaya');
+		$email->setMessage(view('forgot', [
+			'nama' => $login->name,
+			'otp' => $otp,
+		]));
+
+		$result = $email->send();
+		if (!$result) {
+			load_error($email->printDebugger())->pretend(false)->send();
+			exit;
+		}
+	}
 	public function forgot()
 	{
 		if ($this->request->getMethod() === POST && $this->login->current_id) {
 			$action = $this->request->getPost('action');
+			$login = Database::connect()->table('login')->where('login_id', $this->login->current_id)->get()->getRow();
 			if (!$action) {
 				// TODO: If OTP == NULL, send email.
-				return load_204("Account Identified");
-			} if ($action === 'request') {
+				if (!$login->otp) {
+					$otp = generate_pin();
+					Database::connect()->table('login')
+						->where('login_id', $this->login->current_id)
+						->update(['otp' => $otp]);
+					$this->sendForgotEmail($login, $otp);
+				}
+				return load_ok("Akun ditemukan");
+			}
+			if ($action === 'request') {
 				$otp = generate_pin();
 				Database::connect()->table('login')
 					->where('login_id', $this->login->current_id)
 					->update(['otp' => $otp]);
-				// TODO: Send email to the user.
-				return load_ok('Token sent');
+				$this->sendForgotEmail($login, $otp);
+				return load_ok('Token terkirim');
 			} else if ($action === 'response') {
 				$input_otp = $this->request->getPost('otp');
-				$login = get_values_at('login', [
-					'login_id' => $this->login->current_id
-				], ['otp', 'updated_at']);
 				if ((time() - strtotime($login->updated_at)) > 60 * 60 * 24 * 7) {
-					return load_404('OTP expired');
+					return load_404('Token expired');
 				} else if ($input_otp == $login->otp) {
 					$input_pw = $this->request->getPost('password');
 					if ($input_pw && strlen($input_pw) >= 8) {
@@ -68,18 +94,18 @@ class Home extends BaseController
 						Database::connect()->table('login')
 							->where('login_id', $this->login->current_id)
 							->update($update);
-						return load_ok('Successfully saved');
+						return load_ok('Berhasil menyimpan password!');
 					} else {
-						return load_204('Token correct. Please input new Password.');
+						return load_ok('Token benar. Mohon masukkan password baru.');
 					}
 				} else {
-					return load_405('Incorrect OTP');
+					return load_405('OTP Salah');
 				}
 			} else {
-				load_405();
+				return load_405("Wrong Action");
 			}
 		} else {
-			return load_405();
+			return load_405("Akun tak ditemukan");
 		}
 	}
 
@@ -106,16 +132,16 @@ class Home extends BaseController
 
 	public function hash($hash)
 	{
-	    echo password_hash($hash, PASSWORD_BCRYPT);
-	    exit;
+		echo password_hash($hash, PASSWORD_BCRYPT);
+		exit;
 	}
 
 	public function uploads($folder, $file)
 	{
-		$path = WRITEPATH.'uploads'.DIRECTORY_SEPARATOR.$folder.DIRECTORY_SEPARATOR.$file;
+		$path = WRITEPATH . 'uploads' . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $file;
 		if (file_exists($path)) {
 			$ext = pathinfo($path, PATHINFO_EXTENSION);
-			header('Content-Type: '.(new Mimes())->guessTypeFromExtension($ext));
+			header('Content-Type: ' . (new Mimes())->guessTypeFromExtension($ext));
 			echo file_get_contents($path);
 		} else {
 			$this->not_found();
