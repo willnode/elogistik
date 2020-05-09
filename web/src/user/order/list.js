@@ -11,13 +11,14 @@ export default function () {
 		itemLabel="Order"
 		predefinedActions={['archive', 'detail']}
 		columns={{
+			order_resi: 'Resi Barang',
 			order_nama: 'Nama Barang',
-			updated_at: 'Terakhir Update',
 			order_status: {
 				title: 'Status Order',
 				render: row => (
 					statusDict[row.order_status]
 				),
 			},
+			order_updated: 'Terakhir Update',
 		}} />
 }

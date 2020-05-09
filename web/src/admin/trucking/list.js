@@ -11,6 +11,7 @@ export default function () {
 		itemLabel="Order"
 		predefinedActions={['archive', 'edit']}
 		columns={{
+			trucking_resi: 'Resi Sewa',
 			trucking_barang: 'Nama Barang',
 			trucking_status: {
 				title: 'Status Sewa',

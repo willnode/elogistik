@@ -295,6 +295,13 @@ a {
     overflow: auto;
 }
 
+.trucks-thumb {
+    background-color: white;
+    width: calc(100% - 1em);
+    margin-right: 1em;
+    margin-bottom: 1em;
+}
+
 @keyframes marquee {
     0% {
         transform: translate(0, 0);
