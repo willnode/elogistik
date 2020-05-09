@@ -1,15 +1,15 @@
 import React, { useState, useMemo } from 'react';
-import Page from '../widget/page';
-import { Form, Input, Submit, File } from '../widget/controls';
+import Page from '../page';
+import { Form, Input, Submit, File } from '../controls';
 import Typography from '@material-ui/core/Typography';
-import { Context } from '../main/Contexts';
-import { doLogin, login, setMessage } from '../main/Helper';
-import { appKey } from '../main/Config';
+import { Context } from '../../main/Contexts';
+import { doLogin, login, setMessage } from '../../main/Helper';
+import { appKey } from '../../main/Config';
 import {
   useValidator, required, minLength, validEmail,
   matchesValue, matchesField, requireField,
   checkAllValidators, matchesRegex, validTel
-} from '../widget/validators';
+} from '../validators';
 import Box from '@material-ui/core/Box';
 
 function submit(_, data) {

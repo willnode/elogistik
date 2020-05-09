@@ -6,7 +6,7 @@ import {
 	File
 } from 'widget/controls';
 import { useParams } from 'react-router-dom';
-import { doReload, history, formatRupiah } from 'main/Helper';
+import { doReload, history } from 'main/Helper';
 import FormLabel from '@material-ui/core/FormLabel';
 import { statusDict } from 'user/trucking/detail';
 

@@ -1,7 +1,7 @@
 import { SEO } from 'widget/page';
 import React from 'react';
 import Page from '../widget/page';
-import { Input, Form, Select, Submit, FlexGroup } from '../widget/controls';
+import { Input, Form, Submit } from '../widget/controls';
 import Alert from '@material-ui/lab/Alert';
 import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
@@ -17,6 +17,11 @@ export default function Trucking() {
   const [rutes, setRutes] = React.useState(['']);
   const [ok, setOK] = React.useState(false);
   return <Page className="paper" maxWidth="md">
+    <SEO
+      title="Sewa Truk"
+      description="Best Logistics Surabaya adalah perusahaan yang bergerak dibidang jasa pengiriman barang / cargo atau ekspedisi yang didukung oleh tenaga kerja / SDM yang profesional dan cakap serta memiliki armada yang sehat dengan perawatan rutin."
+      image="/assets/beranda/36.jpeg"
+    />
     <Form action="user/trucking" redirect={(json) => history().push('/user/trucking/detail/' + json.id)}>
       <h1>Sewa Truk</h1>
       <Input name="trucking_barang" label="Nama Barang (yang diangkut)" required />
@@ -56,7 +61,7 @@ export default function Trucking() {
         </Grid>
       </Grid>
       <Alert style={{ margin: '1rem 0' }} severity={login() ? "info" : "warning"}>{login() ? 'Data sewa anda akan dimasukkan ke akun anda' : 'Anda perlu masuk untuk melanjutkan'}</Alert>
-      <Submit disabled={!login()} />
+      <Submit disabled={!ok || !login()} />
     </Form>
     {(!login() && <Login callback={() => setOK(true)} />)}
 

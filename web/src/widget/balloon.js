@@ -15,7 +15,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 export default function Balloon() {
   const [open, setOpen] = Context.bind('balloon', useState(false));
-  const anchorEl = React.useRef();
   const ref = React.useRef();
   return <div className="cs-float">
     <Fab

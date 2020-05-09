@@ -6,7 +6,7 @@ import { Switch, Route } from 'react-router-dom';
 import Dashboard from './dashboard';
 import Trucking from './trucking';
 import Order from './order';
-import Profile from 'shared/profile';
+import Profile from 'widget/shared/profile';
 import User from './user';
 import Page404 from 'static/404';
 import { CheckRole } from 'widget/controls';

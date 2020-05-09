@@ -9,7 +9,7 @@ import App from './main/App';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import 'bootstrap/dist/css/bootstrap-grid.css';
-import './style.css';
+import './main/style.css';
 
 function GenerateTheme() {
   return createMuiTheme({
